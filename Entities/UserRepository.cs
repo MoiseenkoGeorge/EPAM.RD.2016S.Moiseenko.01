@@ -7,6 +7,7 @@ namespace Entities
     public class UserRepository : IUserRepository
     {
         private readonly IUserStorage userStorage;
+         
 
         public UserRepository(IUserStorage userStorage)
         {
@@ -28,15 +29,14 @@ namespace Entities
             throw new NotImplementedException();
         }
 
-        public void Create(User entity)
+        public int Create(User entity)
         {
-
-            userStorage.Add(entity);
+            return userStorage.Add(entity);
         }
 
         public void Delete(User entity)
         {
-            throw new NotImplementedException();
+            userStorage.Delete(entity.Id);
         }
 
         public void Update(User entity)

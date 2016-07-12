@@ -9,11 +9,9 @@ namespace Entities
 {
     public class User : IEntity
     {
-        private readonly int id;
-
         public User(int id, string firstName, string lastName, DateTime birthday, Gender gender, VisaRecord[] visaRecords)
         {
-            this.id = id;
+            this.Id = id;
             FirstName = firstName;
             LastName = lastName;
             Birthday = birthday;
@@ -21,17 +19,17 @@ namespace Entities
             VisaRecords = visaRecords;
         }
 
-        public int Id => id;
+        public int Id { get; set; }
 
-        public string FirstName { get; private set; }
+        public string FirstName { get; set; }
 
-        public string LastName { get; private set; }
+        public string LastName { get; set; }
 
-        public DateTime Birthday { get; private set; }
+        public DateTime Birthday { get; set; }
 
-        public Gender Gender { get; private set; }
+        public Gender Gender { get; set; }
 
-        public VisaRecord[] VisaRecords { get; private set; }
+        public VisaRecord[] VisaRecords { get; set; }
 
         public override int GetHashCode()
         {

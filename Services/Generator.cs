@@ -1,24 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Services.Interfacies;
 
 namespace Services
 {
-    public class Generator
+    public class Generator : IGenerator<int>
     {
-        public static IEnumerator<int> GetEvenSequence()
+        private readonly Sequence sequence = new Sequence();
+
+        public int GetNewId()
         {
-            int i = 0;
-            while (true)
-            {
-                yield return i;
-                checked
-                {
-                    i += 2;
-                }
-            }
-        }
+            int result = sequence.Current;
+            sequence.MoveNext();
+            return result;
+        } 
     }
 }

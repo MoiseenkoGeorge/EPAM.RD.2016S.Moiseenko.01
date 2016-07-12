@@ -9,42 +9,39 @@ namespace Services.Tests
         [TestMethod]
         public void GetId_IsFirstElement_ReturnZero()
         {
-            var sequence = Generator.GetEvenSequence();
-            Assert.IsNotNull(sequence);
-            sequence.MoveNext();
-            Assert.AreEqual(0, sequence.Current);
+            var generator = new Generator();
+            Assert.AreEqual(0, generator.GetNewId());
         }
 
         [TestMethod]
         public void GetId_IsSecondElement_ReturnTwo()
         {
-            var sequence = Generator.GetEvenSequence();
-            sequence.MoveNext();
-            sequence.MoveNext();
-            Assert.AreEqual(2, sequence.Current);
+            var generator = new Generator();
+            generator.GetNewId();
+            Assert.AreEqual(2, generator.GetNewId());
         }
 
         [TestMethod]
         [ExpectedException(typeof(OverflowException))]
         public void GetId_IsOverflow_ReturnAnException()
         {
-            var sequence = Generator.GetEvenSequence();
+            var generator = new Generator();
             for (int i = 0; i < int.MaxValue; i++)
             {
-                sequence.MoveNext();
+                generator.GetNewId();
             }
         }
 
         [TestMethod]
         public void GetId_IsEven_ReturnTrue()
         {
-            var a = Generator.GetEvenSequence();
+            var generator = new Generator();
             for (int i = 0; i < 4; i++)
             {
-                a.MoveNext();
+                generator.GetNewId();
             }
 
-            Assert.AreEqual(a.Current % 2, 0);
+            Assert.AreEqual(generator.GetNewId() % 2, 0);
         }
     }
 }

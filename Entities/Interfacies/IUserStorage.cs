@@ -5,6 +5,5 @@ namespace Entities.Interfacies
 {
     public interface IUserStorage : IStorage<User>
     {
-
     }
 }

@@ -11,7 +11,7 @@ namespace Entities.Interfacies
 
         TEntity GetByPredicate(Func<TEntity, bool> func);
 
-        void Create(TEntity entity);
+        int Create(TEntity entity);
 
         void Delete(TEntity entity);
 
