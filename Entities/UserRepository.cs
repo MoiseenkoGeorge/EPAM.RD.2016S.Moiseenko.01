@@ -8,7 +8,6 @@ namespace Entities
     {
         private readonly IUserStorage userStorage;
          
-
         public UserRepository(IUserStorage userStorage)
         {
             this.userStorage = userStorage;
@@ -42,6 +41,11 @@ namespace Entities
         public void Update(User entity)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<int> GetUsersIdsByPredicate(Func<User, bool> func)
+        {
+            return userStorage.Search(func);
         }
     }
 }

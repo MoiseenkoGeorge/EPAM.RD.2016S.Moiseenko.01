@@ -15,14 +15,21 @@ namespace Storage
 
         private readonly IGenerator<int> idGenerator;
 
-        public UserMemoryStorage(IGenerator<int> idGenerator)
+        private readonly IValidator validator;
+
+        public UserMemoryStorage(IGenerator<int> idGenerator, IValidator validator)
         {
             this.idGenerator = idGenerator;
+            this.validator = validator;
             set = new HashSet<User>();
         }
          
         public int Add(User entity)
         {
+            if (!validator.Validate(entity))
+            {
+                throw new InvalidOperationException();
+            }
             entity.Id = idGenerator.GetNewId();
             set.Add(entity);
             return entity.Id;
@@ -31,8 +38,10 @@ namespace Storage
         public void Delete(int id)
         {
             var user = set.SingleOrDefault(u => u.Id == id);
-            if(user == null)
+            if (user == null)
+            {
                 throw new InvalidOperationException();
+            }
             set.RemoveWhere(u => u.Id == id);
         }
 
