@@ -7,6 +7,7 @@ using Entities.Interfacies;
 
 namespace Entities
 {
+    [Serializable]
     public class User : IEntity
     {
         public int Id { get; set; }
@@ -35,6 +36,11 @@ namespace Entities
 
             User user = (User)obj;
             return user.FirstName == FirstName && user.LastName == LastName;
+        }
+
+        public User()
+        {
+            
         }
     }
 }

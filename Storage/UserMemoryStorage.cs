@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Entities;
 using Entities.Interfacies;
 using Services.Generators.Interfacies;
@@ -13,7 +16,11 @@ namespace Storage
 {
     public class UserMemoryStorage : IUserStorage
     {
-        private readonly HashSet<User> storage;
+        private readonly string filePath = ConfigurationManager.AppSettings["FilePath"];
+
+        private readonly XmlSerializer xmlSerializer = new XmlSerializer(typeof(HashSet<User>));
+
+        private HashSet<User> storage;
 
         private readonly IGenerator<int> idGenerator;
 
@@ -49,6 +56,22 @@ namespace Storage
         public IEnumerable<int> Search(Func<User, bool> func)
         {
             return storage.Where(func).Select(u => u.Id);
+        }
+
+        public void Save()
+        {
+            using (FileStream fs = new FileStream(filePath,FileMode.OpenOrCreate))
+            {
+                xmlSerializer.Serialize(fs,storage);
+            }
+        }
+
+        public void Load()
+        {
+            using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
+            {
+                storage = (HashSet<User>)xmlSerializer.Deserialize(fs);
+            }
         }
     }
 }
