@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
+namespace Services.Generators
 {
     public class Sequence : IEnumerator<int>
     {
@@ -18,10 +18,19 @@ namespace Services
 
         public bool MoveNext()
         {
-            checked
+            try
             {
-                current += 2;
+                checked
+                {
+                    current += 2;
+                }
             }
+            catch (OverflowException)
+            {
+                Reset();
+                return false;
+            }
+            
             return true;
         }
 

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Entities;
 using Entities.Interfacies;
 using Ninject;
-using Services;
-using Services.Interfacies;
+using Services.Generators;
+using Services.Generators.Interfacies;
 using Storage;
 
 namespace DependencyResolver
@@ -19,6 +19,7 @@ namespace DependencyResolver
             kernel.Bind<IUserStorage>().To<UserMemoryStorage>();
             kernel.Bind<IUserRepository>().To<UserRepository>();
             kernel.Bind<IGenerator<int>>().To<Generator>();
+            kernel.Bind<ICollection<User>>().To<HashSet<User>>();
         }
     }
 }

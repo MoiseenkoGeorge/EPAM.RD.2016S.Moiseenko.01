@@ -9,16 +9,6 @@ namespace Entities
 {
     public class User : IEntity
     {
-        public User(int id, string firstName, string lastName, DateTime birthday, Gender gender, VisaRecord[] visaRecords)
-        {
-            this.Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            Birthday = birthday;
-            Gender = gender;
-            VisaRecords = visaRecords;
-        }
-
         public int Id { get; set; }
 
         public string FirstName { get; set; }

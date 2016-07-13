@@ -40,12 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Generator.cs" />
-    <Compile Include="Interfacies\IGenerator.cs" />
-    <Compile Include="Interfacies\IValidator.cs" />
-    <Compile Include="Sequence.cs" />
+    <Compile Include="Generators\Generator.cs" />
+    <Compile Include="Generators\Interfacies\IGenerator.cs" />
+    <Compile Include="Validators\Interfacies\IUserValidator.cs" />
+    <Compile Include="Validators\Interfacies\IValidator.cs" />
+    <Compile Include="Generators\Sequence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validator.cs" />
+    <Compile Include="Validators\ValidationError.cs" />
+    <Compile Include="Validators\ValidationException.cs" />
+    <Compile Include="Validators\ValidationResult.cs" />
+    <Compile Include="Validators\Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities\Entities.csproj">

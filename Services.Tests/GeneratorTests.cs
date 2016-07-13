@@ -1,41 +1,42 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Services.Generators;
 
 namespace Services.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class GeneratorTests
     {
-        [TestMethod]
-        public void GetId_IsFirstElement_ReturnZero()
+        private Generator generator;
+        [SetUp]
+        public void Init()
         {
-            var generator = new Generator();
-            Assert.AreEqual(0, generator.GetNewId());
+            generator = new Generator();
         }
 
-        [TestMethod]
-        public void GetId_IsSecondElement_ReturnTwo()
+        [Test]
+        public void GetNewId_FirstElementIsZero_ReturnTrue()
         {
-            var generator = new Generator();
-            generator.GetNewId();
-            Assert.AreEqual(2, generator.GetNewId());
+            Assert.AreEqual(0, generator.GetNewId());   
         }
-
-        [TestMethod]
-        [ExpectedException(typeof(OverflowException))]
-        public void GetId_IsOverflow_ReturnAnException()
+        
+        [Test]
+        public void GetNewId_ThirdElementIsFour_ReturnTrue()
         {
-            var generator = new Generator();
-            for (int i = 0; i < int.MaxValue; i++)
+            for (int i = 0; i < 2; i++)
             {
                 generator.GetNewId();
             }
+            Assert.AreEqual(4,generator.GetNewId());
         }
 
-        [TestMethod]
-        public void GetId_IsEven_ReturnTrue()
+        [Test]
+        public void GetNewId_IdIsEven_ReturnTrue()
         {
-            var generator = new Generator();
             for (int i = 0; i < 4; i++)
             {
                 generator.GetNewId();
@@ -43,6 +44,17 @@ namespace Services.Tests
 
             Assert.AreEqual(generator.GetNewId() % 2, 0);
         }
+
+        [Test]
+        public void GetNewId_1073741824IdIsZero_ReturnTrue()
+        {
+            int id = 0;
+            for (int i = 0; i < 1073741825; i++)
+            {
+                id = generator.GetNewId();
+            }
+            Assert.AreEqual(0, id);
+        }
+
     }
 }
-

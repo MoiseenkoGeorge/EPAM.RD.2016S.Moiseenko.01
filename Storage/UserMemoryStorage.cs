@@ -5,49 +5,50 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities;
 using Entities.Interfacies;
-using Services.Interfacies;
+using Services.Generators.Interfacies;
+using Services.Validators;
+using Services.Validators.Interfacies;
 
 namespace Storage
 {
     public class UserMemoryStorage : IUserStorage
     {
-        private readonly HashSet<User> set;
+        private readonly HashSet<User> storage;
 
         private readonly IGenerator<int> idGenerator;
 
-        private readonly IValidator validator;
+        private readonly IUserValidator userValidator;
 
-        public UserMemoryStorage(IGenerator<int> idGenerator, IValidator validator)
+        public UserMemoryStorage(IGenerator<int> idGenerator, IUserValidator userValidator)
         {
             this.idGenerator = idGenerator;
-            this.validator = validator;
-            set = new HashSet<User>();
+            this.userValidator = userValidator;
+            storage = new HashSet<User>();
         }
          
         public int Add(User entity)
         {
-            if (!validator.Validate(entity))
-            {
-                throw new InvalidOperationException();
-            }
+            var validationResult = userValidator.Validate(entity);
+            if(!validationResult.IsValid)
+                throw new ValidationException(new List<ValidationResult>() {validationResult});
             entity.Id = idGenerator.GetNewId();
-            set.Add(entity);
+            storage.Add(entity);
             return entity.Id;
         }
 
         public void Delete(int id)
         {
-            var user = set.SingleOrDefault(u => u.Id == id);
+            var user = storage.SingleOrDefault(u => u.Id == id);
             if (user == null)
             {
                 throw new InvalidOperationException();
             }
-            set.RemoveWhere(u => u.Id == id);
+            storage.RemoveWhere(u => u.Id == id);
         }
 
         public IEnumerable<int> Search(Func<User, bool> func)
         {
-            return set.Where(func).Select(u => u.Id);
+            return storage.Where(func).Select(u => u.Id);
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using Services.Interfacies;
+﻿using Services.Generators.Interfacies;
 
-namespace Services
+namespace Services.Generators
 {
     public class Generator : IGenerator<int>
     {
