@@ -51,13 +51,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{4faaf815-09ad-41f7-af72-9df1616e36d9}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{ba1da19c-463e-4046-8247-0a0660dc1e62}</Project>
       <Name>Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Services\Services.csproj">
-      <Project>{e985ec9c-9119-4689-b7d2-117173c85efd}</Project>
-      <Name>Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\Storage\Storage.csproj">
       <Project>{726d5631-200d-4c94-a3d8-5eb511470e52}</Project>

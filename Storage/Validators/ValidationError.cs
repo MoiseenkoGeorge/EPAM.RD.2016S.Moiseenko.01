@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 
-namespace Services.Validators
+namespace Storage.Validators
 {
     [Serializable]
     public class ValidationError

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL;
+using DAL.Interfacies;
 using Entities;
-using Entities.Interfacies;
 using Ninject;
-using Services.Generators;
-using Services.Generators.Interfacies;
 using Storage;
+using Storage.Generators;
+using Storage.Generators.Interfacies;
+using Storage.Storages;
+using Storage.Storages.Interfacies;
 
 namespace DependencyResolver
 {

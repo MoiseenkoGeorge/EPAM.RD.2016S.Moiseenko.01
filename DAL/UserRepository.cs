@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Entities.Interfacies;
+using DAL.Interfacies;
+using Entities;
+using Storage.Storages.Interfacies;
 
-namespace Entities
+namespace DAL
 {
     public class UserRepository : IUserRepository
     {

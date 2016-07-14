@@ -1,7 +1,7 @@
 ﻿using System;
-using Services.Generators.Interfacies;
+using Storage.Generators.Interfacies;
 
-namespace Services.Generators
+namespace Storage.Generators
 {
     public class Generator : IGenerator<int>
     {

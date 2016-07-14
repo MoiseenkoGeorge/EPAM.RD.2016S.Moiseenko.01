@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Services.Validators
+namespace Storage.Validators
 {
     [Serializable]
     public class ValidationException : Exception

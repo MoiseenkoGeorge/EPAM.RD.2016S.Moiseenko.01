@@ -2,13 +2,14 @@
 
 namespace Entities
 {
+    [Serializable]
     public struct VisaRecord
     {
-        public string Country { get; private set; }
+        public string Country { get; set; }
 
-        public DateTime From { get; private set; }
+        public DateTime From { get; set; }
 
-        public DateTime Until { get; private set; }
+        public DateTime Until { get;  set; }
         /// <param name="country"> Name of country</param>
         /// <param name="from"> The start time of visa</param>
         /// <param name="until"> The end time of visa</param>

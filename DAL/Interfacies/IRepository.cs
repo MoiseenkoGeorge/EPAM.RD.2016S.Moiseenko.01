@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Entities.Interfacies;
 
-namespace Entities.Interfacies
+namespace DAL.Interfacies
 {
     public interface IRepository<TEntity> where TEntity : IEntity
     {

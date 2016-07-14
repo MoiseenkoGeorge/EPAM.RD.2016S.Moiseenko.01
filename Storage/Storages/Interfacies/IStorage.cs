@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Entities.Interfacies;
 
-namespace Entities.Interfacies
+namespace Storage.Storages.Interfacies
 {
     public interface IStorage<TEntity> where TEntity : IEntity
     {

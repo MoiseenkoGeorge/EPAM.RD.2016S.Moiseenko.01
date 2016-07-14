@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Entities;
-using Services.Validators.Interfacies;
+using Storage.Validators.Interfacies;
 
-namespace Services.Validators
+namespace Storage.Validators
 {
     public class Validator : IUserValidator
     {

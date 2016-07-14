@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Entities;
 
-namespace Entities.Interfacies
+namespace DAL.Interfacies
 {
     public interface IUserRepository : IRepository<User>
     {

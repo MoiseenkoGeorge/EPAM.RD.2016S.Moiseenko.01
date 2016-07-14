@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Entities;
-using Entities.Interfacies;
-using Services.Generators.Interfacies;
-using Services.Validators;
-using Services.Validators.Interfacies;
+using Storage.Generators.Interfacies;
+using Storage.Storages.Interfacies;
+using Storage.Validators;
+using Storage.Validators.Interfacies;
 
-namespace Storage
+namespace Storage.Storages
 {
     public class UserMemoryStorage : IUserStorage
     {
@@ -55,7 +53,7 @@ namespace Storage
 
         public IEnumerable<int> Search(Func<User, bool>[] funcs)
         {
-            return storage.Where(u => funcs.Any(f => f(u))).Select(u => u.Id);
+            return storage.Where(u => funcs.All(f => f(u))).Select(u => u.Id);
         }
 
         public void Save()

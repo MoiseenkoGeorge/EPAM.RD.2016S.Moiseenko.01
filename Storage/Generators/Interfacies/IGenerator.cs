@@ -1,4 +1,4 @@
-﻿namespace Services.Generators.Interfacies
+﻿namespace Storage.Generators.Interfacies
 {
     public interface IGenerator<T>
     {

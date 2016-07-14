@@ -42,13 +42,8 @@
   <ItemGroup>
     <Compile Include="Gender.cs" />
     <Compile Include="Interfacies\IEntity.cs" />
-    <Compile Include="Interfacies\IRepository.cs" />
-    <Compile Include="Interfacies\IStorage.cs" />
-    <Compile Include="Interfacies\IUserRepository.cs" />
-    <Compile Include="Interfacies\IUserStorage.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserRepository.cs" />
     <Compile Include="VisaRecord.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

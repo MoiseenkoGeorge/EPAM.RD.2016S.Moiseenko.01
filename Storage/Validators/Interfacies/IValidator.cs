@@ -1,6 +1,4 @@
-﻿using Services.Validators;
-
-namespace Services.Validators.Interfacies
+﻿namespace Storage.Validators.Interfacies
 {
     public interface IValidator<T> where T : class
     {
