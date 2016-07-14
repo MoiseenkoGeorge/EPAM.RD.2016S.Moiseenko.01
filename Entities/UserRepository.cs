@@ -43,9 +43,9 @@ namespace Entities
             throw new NotImplementedException();
         }
 
-        public IEnumerable<int> GetUsersIdsByPredicate(Func<User, bool> func)
+        public IEnumerable<int> GetUsersIdsByPredicate(Func<User, bool>[] funcs)
         {
-            return userStorage.Search(func);
+            return userStorage.Search(funcs);
         }
     }
 }

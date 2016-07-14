@@ -53,9 +53,9 @@ namespace Storage
             storage.RemoveWhere(u => u.Id == id);
         }
 
-        public IEnumerable<int> Search(Func<User, bool> func)
+        public IEnumerable<int> Search(Func<User, bool>[] funcs)
         {
-            return storage.Where(func).Select(u => u.Id);
+            return storage.Where(u => funcs.Any(f => f(u))).Select(u => u.Id);
         }
 
         public void Save()

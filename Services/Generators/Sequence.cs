@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 
 namespace Services.Generators
 {
-    public class Sequence : IEnumerator<int>
+    public class EvenSequence : IEnumerator<int>
     {
         private int current;
 
+        public void SetCurrent(int id)
+        {
+            current = id;
+        }
         public void Dispose()
         {
 

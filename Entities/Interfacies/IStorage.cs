@@ -10,6 +10,10 @@ namespace Entities.Interfacies
         /// <param name="id"> User's Id</param>
         void Delete(int id);
 
-        IEnumerable<int> Search(Func<TEntity, bool> func);
+        IEnumerable<int> Search(Func<TEntity, bool>[] funcs);
+
+        void Save();
+
+        void Load();
     }
 }
