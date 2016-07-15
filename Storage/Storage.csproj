@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Generators\Generator.cs" />
     <Compile Include="Generators\Interfacies\IGenerator.cs" />
     <Compile Include="Generators\Sequence.cs" />

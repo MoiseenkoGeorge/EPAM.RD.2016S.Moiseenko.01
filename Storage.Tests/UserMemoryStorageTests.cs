@@ -47,9 +47,9 @@ namespace Storage.Tests
         [Test]
         public void Add_NewValidUser_ReturnIdFour()
         {
-            User valUser = new User() {FirstName = "sad", LastName = "asd", Gender = Gender.Male, Birthday = DateTime.Today};
+            User valUser = new User() { FirstName = "sad", LastName = "asd", Gender = Gender.Male, Birthday = DateTime.Today };
             var result = userStorage.Add(valUser);
-            Assert.AreEqual(4,result);
+            Assert.AreEqual(4, result);
         }
 
         [Test]
@@ -76,8 +76,8 @@ namespace Storage.Tests
         [Test]
         public void Search_SearchById_returnOneId()
         {
-            var result = userStorage.Search(new Func<User, bool>[] {u => u.Id == 0});
-            Assert.AreEqual(result.Count(),1);
+            var result = userStorage.Search(new Func<User, bool>[] { u => u.Id == 0 });
+            Assert.AreEqual(result.Count(), 1);
         }
 
         [Test]
@@ -86,7 +86,22 @@ namespace Storage.Tests
             var result =
                 userStorage.Search(new Func<User, bool>[]
                 {u => u.FirstName == "Ivan", u => u.Birthday == DateTime.Today});
-            Assert.AreEqual(result.Count(),1);
+            Assert.AreEqual(result.Count(), 1);
+        }
+        #endregion
+
+        #region
+
+        [Test]
+        public void Save_SaveCurrentStateOfStorage_ReturnTrue()
+        {
+            var currentStorage = userStorage.Search(new Func<User, bool>[] { u => true });
+
+            userStorage.Save();
+            userStorage.Load();
+
+            var result = userStorage.Search(new Func<User, bool>[] { u => true });
+            Assert.AreEqual(currentStorage.Count(), result.Count());
         }
         #endregion
     }

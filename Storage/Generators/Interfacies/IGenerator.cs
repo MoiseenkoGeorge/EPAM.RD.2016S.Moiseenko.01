@@ -5,5 +5,7 @@
         T GetNewId();
 
         void Init(T id);
+
+        T Current { get; }
     }
 }

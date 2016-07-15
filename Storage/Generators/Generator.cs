@@ -24,6 +24,6 @@ namespace Storage.Generators
             sequence.SetCurrent(id);
         }
 
-
+        public int Current => sequence.Current;
     }
 }

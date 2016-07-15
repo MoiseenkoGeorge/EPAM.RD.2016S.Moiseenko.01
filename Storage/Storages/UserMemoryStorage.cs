@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Serialization;
 using Entities;
 using Storage.Generators.Interfacies;
@@ -14,9 +15,9 @@ namespace Storage.Storages
 {
     public class UserMemoryStorage : IUserStorage
     {
-        private readonly string filePath = ConfigurationManager.AppSettings["FilePath"];
+        private readonly string filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Users.xml");
 
-        private readonly XmlSerializer xmlSerializer = new XmlSerializer(typeof(HashSet<User>));
+        private readonly XmlSerializer xmlSerializer = new XmlSerializer(typeof(StateContainer));
 
         private HashSet<User> storage;
 
@@ -58,18 +59,34 @@ namespace Storage.Storages
 
         public void Save()
         {
-            using (FileStream fs = new FileStream(filePath,FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(filePath,FileMode.OpenOrCreate,FileAccess.Write))
             {
-                xmlSerializer.Serialize(fs,storage);
+                xmlSerializer.Serialize(fs,new StateContainer(storage, idGenerator.Current));
             }
         }
 
         public void Load()
         {
-            using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(filePath, FileMode.Open,FileAccess.Read))
             {
-                storage = (HashSet<User>)xmlSerializer.Deserialize(fs);
+                StateContainer result = (StateContainer)xmlSerializer.Deserialize(fs);
+                idGenerator.Init(result.id);
+                storage = result.storage;
             }
+        }
+
+    }
+
+    [Serializable]
+    public struct StateContainer
+    {
+        public HashSet<User> storage;
+        public int id;
+
+        public StateContainer(HashSet<User> storage, int id)
+        {
+            this.storage = storage;
+            this.id = id;
         }
     }
 }
