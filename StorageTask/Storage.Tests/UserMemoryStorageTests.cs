@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -37,7 +38,7 @@ namespace Storage.Tests
         [SetUp]
         public void Init()
         {
-            userStorage = new UserMemoryStorage(new Generator(), new Validator());
+            userStorage = new UserMemoryStorage(new Generator(), new Validator(),ConfigurationManager.AppSettings["FileName"]);
             userStorage.Add(validUser1);
             userStorage.Add(validUser2);
         }

@@ -15,7 +15,7 @@ namespace Storage.Storages
 {
     public class UserMemoryStorage : IUserStorage
     {
-        private readonly string filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Users.xml");
+        private readonly string filePath;
 
         private readonly XmlSerializer xmlSerializer = new XmlSerializer(typeof(StateContainer));
 
@@ -25,8 +25,9 @@ namespace Storage.Storages
 
         private readonly IUserValidator userValidator;
 
-        public UserMemoryStorage(IGenerator<int> idGenerator, IUserValidator userValidator)
+        public UserMemoryStorage(IGenerator<int> idGenerator, IUserValidator userValidator, string fileName)
         {
+            filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), fileName);
             this.idGenerator = idGenerator;
             this.userValidator = userValidator;
             storage = new HashSet<User>();

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Entities;
-using  NUnit.Framework;
+using NUnit.Framework;
 using Storage.Validators;
 
-namespace Services.Tests
+namespace Storage.Tests
 {
     [TestFixture]
     public class ValidatorTests
