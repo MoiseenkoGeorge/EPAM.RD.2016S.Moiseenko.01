@@ -1,0 +1,9 @@
+D:\George_Moiseenko\temp\Day3\Attributes.Tests\obj\Debug\Attributes.Tests.csprojResolveAssemblyReference.cache
+D:\George_Moiseenko\temp\Day3\Attributes.Tests\bin\Debug\Attributes.Tests.dll
+D:\George_Moiseenko\temp\Day3\Attributes.Tests\bin\Debug\Attributes.Tests.pdb
+D:\George_Moiseenko\temp\Day3\Attributes.Tests\bin\Debug\Attributes.dll
+D:\George_Moiseenko\temp\Day3\Attributes.Tests\bin\Debug\nunit.framework.dll
+D:\George_Moiseenko\temp\Day3\Attributes.Tests\bin\Debug\Attributes.pdb
+D:\George_Moiseenko\temp\Day3\Attributes.Tests\bin\Debug\nunit.framework.xml
+D:\George_Moiseenko\temp\Day3\Attributes.Tests\obj\Debug\Attributes.Tests.dll
+D:\George_Moiseenko\temp\Day3\Attributes.Tests\obj\Debug\Attributes.Tests.pdb
