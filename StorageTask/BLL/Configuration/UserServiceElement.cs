@@ -19,7 +19,7 @@ namespace BLL.Configuration
         [ConfigurationProperty("isMaster", DefaultValue = false, IsKey = false, IsRequired = false)]
         public bool IsMaster
         {
-            get { return bool.Parse((string)base["isMaster"]); }
+            get { return bool.Parse(base["isMaster"].ToString()); }
             set { base["isMaster"] = value; }
         }
     }

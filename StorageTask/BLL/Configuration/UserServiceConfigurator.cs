@@ -36,6 +36,14 @@ namespace BLL.Configuration
             this.countOfSlaves = userServiceElements.Count(s => !s.IsMaster);
         }
 
+        public UserServiceConfigurator(IUserRepository userRepository,int countOfMasters,int countOfSlaves)
+        {
+            if (userRepository == null)
+                throw new ArgumentNullException(nameof(userRepository));
+            this.userRepository = userRepository;
+            this.countOfMasters = countOfMasters;
+            this.countOfSlaves = countOfSlaves;
+        }
         public IUserService[] GetServices()
         {
             if (this.countOfMasters != 1)

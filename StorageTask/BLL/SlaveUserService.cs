@@ -9,6 +9,7 @@ namespace BLL
     public class SlaveUserService : IUserService
     {
         public bool IsMaster => false;
+
         public event EventHandler<UserEventArgs> UserAdded;
         public event EventHandler<UserEventArgs> UserDeleted;
 
@@ -16,12 +17,12 @@ namespace BLL
 
         protected void UserAddedHandler(object sender, UserEventArgs userEventArgs)
         {
-            // do something
+            throw new NotImplementedException();
         }
 
         protected void UserDeletedHandler(object sender, UserEventArgs userEventArgs)
         {
-            //do something
+            throw new NotImplementedException();
         }
 
         public SlaveUserService(IUserRepository userRepository, IUserService userService)

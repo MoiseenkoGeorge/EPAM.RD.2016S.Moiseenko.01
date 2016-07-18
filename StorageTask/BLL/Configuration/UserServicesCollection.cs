@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Configuration
 {
-    [ConfigurationCollection(typeof(UserServiceElement))]
+    [ConfigurationCollection(typeof(UserServiceElement), AddItemName = "Service")]
     class UserServicesCollection : ConfigurationElementCollection
     {
         protected override ConfigurationElement CreateNewElement()
@@ -19,7 +19,5 @@ namespace BLL.Configuration
         {
             return ((UserServiceElement)(element)).Name;
         }
-
-        public UserServiceElement this[int idx] => (UserServiceElement)BaseGet(idx);
     }
 }
