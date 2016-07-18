@@ -1,0 +1,6 @@
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day4_Disposable\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day4_Disposable\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day4_Disposable\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day4_Disposable\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day4_Disposable\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day4_Disposable\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb

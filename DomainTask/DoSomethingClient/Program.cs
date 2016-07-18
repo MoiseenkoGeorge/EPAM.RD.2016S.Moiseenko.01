@@ -51,11 +51,11 @@ namespace DoSomethingClient
 
                 Result result = loader.LoadFile(path, input); // TODO: Use loader here.
 
-                Console.WriteLine("Method1: {0}", result.Value);
+                Console.WriteLine($"Method1: {result.Value}");
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exception: {0}", e.Message);
+                Console.WriteLine($"Exception: {e.Message}");
             }
 
             // TODO: Unload domain
@@ -79,11 +79,11 @@ namespace DoSomethingClient
             {
                 Result result = loader.Load("MyLibrary, Version=1.2.3.4, Culture=neutral, PublicKeyToken=f46a87b3d9a80705", input); // TODO: Use loader here.
 
-                Console.WriteLine("Method2: {0}", result.Value);
+                Console.WriteLine($"Method2: {result.Value}");
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exception: {0}", e.Message);
+                Console.WriteLine($"Exception: {e.Message}");
             }
             AppDomain.Unload(domain);
             // TODO: Unload domain

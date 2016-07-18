@@ -1,0 +1,7 @@
+D:\George_Moiseenko\temp\Day4_Streams\CopyFiles\bin\Debug\CopyFiles.exe.config
+D:\George_Moiseenko\temp\Day4_Streams\CopyFiles\bin\Debug\TextFile.txt
+D:\George_Moiseenko\temp\Day4_Streams\CopyFiles\bin\Debug\CopyFiles.exe
+D:\George_Moiseenko\temp\Day4_Streams\CopyFiles\bin\Debug\CopyFiles.pdb
+D:\George_Moiseenko\temp\Day4_Streams\CopyFiles\obj\Debug\CopyFiles.csprojResolveAssemblyReference.cache
+D:\George_Moiseenko\temp\Day4_Streams\CopyFiles\obj\Debug\CopyFiles.exe
+D:\George_Moiseenko\temp\Day4_Streams\CopyFiles\obj\Debug\CopyFiles.pdb
