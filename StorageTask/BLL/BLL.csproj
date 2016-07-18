@@ -44,6 +44,8 @@
     <Compile Include="Configuration\UserServiceConfigurator.cs" />
     <Compile Include="Configuration\UserServiceElement.cs" />
     <Compile Include="Configuration\UserServicesCollection.cs" />
+    <Compile Include="Loggers\Interfacies\ILogger.cs" />
+    <Compile Include="Loggers\Logger.cs" />
     <Compile Include="MasterUserService.cs" />
     <Compile Include="Interfacies\IService.cs" />
     <Compile Include="Interfacies\IUserService.cs" />

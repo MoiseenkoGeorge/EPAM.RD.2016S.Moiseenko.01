@@ -12,6 +12,7 @@ using Storage.Storages;
 using Storage.Generators;
 using Storage.Validators;
 using Entities;
+using System.Diagnostics;
 
 namespace BLL.Tests
 {
@@ -34,17 +35,18 @@ namespace BLL.Tests
             };
         } 
         [Test]
-        public void UserService_CreateUserServices_ReturnAnException()
+        public void UserService_CreateUserServicesWithTwoMasters_ReturnAnException()
         {
-            Assert.Throws<InvalidOperationException>(() => new UserServiceConfigurator(userRepository, 2, 2));
+            var userServiceConfigurator = new UserServiceConfigurator(userRepository,2,2);
+            Assert.Throws<InvalidOperationException>(() => userServiceConfigurator.GetServices());
         }
 
         [Test]
-        public void UserService_CreateThreeUserServicesFromAppConfig_ReturnThreeServices()
+        public void UserService_CreateTwoUserServicesFromAppConfig_ReturnTwoServices()
         {
             var configurator = new UserServiceConfigurator(userRepository);
             var result = configurator.GetServices();
-            Assert.AreEqual(3, result.Length);
+            Assert.AreEqual(2, result.Length);
         }
 
         [Test]
@@ -61,6 +63,15 @@ namespace BLL.Tests
             var configurator = new UserServiceConfigurator(userRepository);
             var result = configurator.GetServices();
             Assert.Throws<NotImplementedException>( ( ) => result[0].AddUser(validUser) );
+        }
+
+        [Test]
+        public void UserService_DeleteUserThrowMasterUserService_SlaveUserServiceHandleEvent()
+        {
+            var configurator = new UserServiceConfigurator(userRepository);
+            var result = configurator.GetServices();
+            result[0].AddUser(validUser);
+            Assert.Throws<NotImplementedException>(() => result[0].DeleteUser(validUser));
         }
     }
 }

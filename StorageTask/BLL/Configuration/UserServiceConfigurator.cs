@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Linq;
 using BLL.Interfacies;
 using DAL.Interfacies;
+using BLL.Loggers;
 
 namespace BLL.Configuration
 {
@@ -58,11 +59,11 @@ namespace BLL.Configuration
 
             IUserService[] services = new IUserService[this.countOfMasters + this.countOfSlaves];
 
-            services[0] = new MasterUserService(this.userRepository);
+            services[0] = new MasterUserService(this.userRepository, new Logger());
 
             for (int i = 0; i < this.countOfSlaves; i++)
             {
-                services[i + 1] = new SlaveUserService(this.userRepository, services[0]);
+                services[i + 1] = new SlaveUserService(this.userRepository, services[0], new Logger());
             }
 
             return services;
