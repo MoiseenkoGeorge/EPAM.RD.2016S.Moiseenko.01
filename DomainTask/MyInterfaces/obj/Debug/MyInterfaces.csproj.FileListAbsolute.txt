@@ -1,0 +1,5 @@
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\MyInterfaces\bin\Debug\MyInterfaces.dll
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\MyInterfaces\bin\Debug\MyInterfaces.pdb
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\MyInterfaces\obj\Debug\MyInterfaces.csprojResolveAssemblyReference.cache
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\MyInterfaces\obj\Debug\MyInterfaces.dll
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\MyInterfaces\obj\Debug\MyInterfaces.pdb

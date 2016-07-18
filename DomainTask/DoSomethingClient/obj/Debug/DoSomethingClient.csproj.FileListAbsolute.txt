@@ -1,0 +1,10 @@
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\DoSomethingClient\bin\Debug\DoSomethingClient.exe.config
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\DoSomethingClient\bin\Debug\DoSomethingClient.exe
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\DoSomethingClient\bin\Debug\DoSomethingClient.pdb
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\DoSomethingClient\bin\Debug\MyInterfaces.dll
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\DoSomethingClient\bin\Debug\MyInterfaces.pdb
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\DoSomethingClient\obj\Debug\DoSomethingClient.csprojResolveAssemblyReference.cache
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\DoSomethingClient\obj\Debug\DoSomethingClient.exe
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\DoSomethingClient\obj\Debug\DoSomethingClient.pdb
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\DoSomethingClient\bin\Debug\MyLibrary.dll
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\DoSomethingClient\bin\Debug\MyLibrary.pdb

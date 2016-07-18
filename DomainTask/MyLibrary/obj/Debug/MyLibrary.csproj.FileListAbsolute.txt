@@ -1,0 +1,7 @@
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\MyLibrary\bin\Debug\MyLibrary.dll
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\MyLibrary\bin\Debug\MyLibrary.pdb
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\MyLibrary\bin\Debug\MyInterfaces.dll
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\MyLibrary\bin\Debug\MyInterfaces.pdb
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\MyLibrary\obj\Debug\MyLibrary.csprojResolveAssemblyReference.cache
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\MyLibrary\obj\Debug\MyLibrary.dll
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\DomainTask\MyLibrary\obj\Debug\MyLibrary.pdb
