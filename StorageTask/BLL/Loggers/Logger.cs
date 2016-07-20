@@ -25,24 +25,12 @@ namespace BLL.Loggers
         {
             IsActivated = isActivated;
         }
-        public void Info(string message)
+
+        public void SendMessage(TraceEventType type, string message)
         {
             if(IsActivated)
-                traceSource.TraceEvent(TraceEventType.Information, 1, message);
+                traceSource.TraceEvent(type, 1, message);
         }
-
-        public void Warning(string message)
-        {
-            if (IsActivated)
-                traceSource.TraceEvent(TraceEventType.Warning, 1, message);
-        }
-
-        public void Error(string message)
-        {
-            if (IsActivated)
-                traceSource.TraceEvent(TraceEventType.Error, 1, message);
-        }
-
 
     }
 }

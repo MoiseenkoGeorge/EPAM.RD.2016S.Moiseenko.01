@@ -11,14 +11,12 @@ using Entities;
 
 namespace BLL
 {
-    public class MasterUserService : IUserService
+    public class MasterUserService : UserService
     {
-        public bool IsMaster => true;
-        public event EventHandler<UserEventArgs> UserAdded = delegate { };
-        public event EventHandler<UserEventArgs> UserDeleted = delegate { };
+        public override bool IsMaster => true;
 
-        private readonly IUserRepository userRepository;
-        private readonly ILogger logger;
+        public override event EventHandler<UserEventArgs> UserAdded = delegate { };
+        public override event EventHandler<UserEventArgs> UserDeleted = delegate { };
 
         protected virtual void OnUserAdded(UserEventArgs e)
         {
@@ -32,47 +30,27 @@ namespace BLL
             temp.Invoke(this, e);
         }
 
-        public MasterUserService(IUserRepository userRepository, ILogger logger)
+        public MasterUserService(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
-            this.logger = logger;
         }
 
-        public int AddUser(User user)
+        public override int AddUser(User user)
         {
             int result = 0;
-            try
-            {
-                result = userRepository.Create(user);
-            }
-            catch (Exception e)
-            { 
-                logger.Error($"error when create User, stacktrace - {e.StackTrace}");
-                throw e;
-            }
-            logger.Info($"user has been added, his id = {result}");
+            result = userRepository.Create(user);
             OnUserAdded(new UserEventArgs(user));
             return result;
         }
 
-        public void DeleteUser(User user)
+        public override void DeleteUser(User user)
         {
-            try
-            {
-                userRepository.Delete(user);
-            }
-            catch (Exception e)
-            {
-                logger.Error($"error when delete User, stacktrace - {e.StackTrace}");
-                throw e;
-            }
-            logger.Info($"User has been deleted, his id was = {user.Id}");
+            userRepository.Delete(user);
             OnUserDeleted(new UserEventArgs(user));
         }
 
         public IEnumerable<int> FindUser(Func<User, bool>[] funcs)
         {
-            logger.Info("Master find users by key");
             return userRepository.GetUsersIdsByPredicate(funcs);
         }
     }

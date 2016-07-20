@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace BLL.Configuration
+namespace BLL.Configurations
 {
     class UserServiceConfigSection : ConfigurationSection
     {

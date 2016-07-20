@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,7 @@ namespace BLL.Loggers.Interfacies
 
         bool IsActivated { get; }
 
-        void Info(string message);
-        void Warning(string message);
-        void Error(string message);
+        void SendMessage(TraceEventType type, string message);
     }
 
 }

@@ -2,10 +2,10 @@
 using System.Configuration;
 using System.Linq;
 using BLL.Interfacies;
-using DAL.Interfacies;
 using BLL.Loggers;
+using DAL.Interfacies;
 
-namespace BLL.Configuration
+namespace BLL.Configurations
 {
     public class UserServiceConfigurator
     {

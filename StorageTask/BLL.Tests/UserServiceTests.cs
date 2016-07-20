@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
-using BLL.Configuration;
 using DAL.Interfacies;
 using DAL;
 using Storage.Storages;
@@ -13,6 +12,7 @@ using Storage.Generators;
 using Storage.Validators;
 using Entities;
 using System.Diagnostics;
+using BLL.Configurations;
 
 namespace BLL.Tests
 {

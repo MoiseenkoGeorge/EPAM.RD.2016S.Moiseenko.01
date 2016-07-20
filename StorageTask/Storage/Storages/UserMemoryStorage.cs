@@ -68,7 +68,7 @@ namespace Storage.Storages
 
         public void Load()
         {
-            using (FileStream fs = new FileStream(filePath, FileMode.Open,FileAccess.Read))
+            using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate,FileAccess.Read))
             {
                 StateContainer result = (StateContainer)xmlSerializer.Deserialize(fs);
                 idGenerator.Init(result.id);

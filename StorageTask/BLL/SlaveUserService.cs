@@ -7,29 +7,25 @@ using Entities;
 
 namespace BLL
 {
-    public class SlaveUserService : IUserService
+    public class SlaveUserService : UserService
     {
-        private readonly IUserRepository userRepository;
-        private readonly ILogger logger;
+        public override bool IsMaster => false;
 
-        public bool IsMaster => false;
-
-        public event EventHandler<UserEventArgs> UserAdded
+        public override event EventHandler<UserEventArgs> UserAdded
         {
-            add
-            {
-                throw new InvalidOperationException();
-            }
-            remove
-            {
-                throw new InvalidOperationException();
-            }
+            add { throw new InvalidOperationException("UserAddedEvent is not availbale for slaveUserService"); }
+            remove { throw new InvalidOperationException("UserAddedEvent is not availbale for slaveUserService"); }
         }
-        public event EventHandler<UserEventArgs> UserDeleted;
+        public override event EventHandler<UserEventArgs> UserDeleted
+        {
+            add { throw new InvalidOperationException("UserDeletedEvent is not availbale for slaveUserService"); }
+            remove { throw new InvalidOperationException("UserDeletedEvent is not availbale for slaveUserService"); }
+        }
 
         
         protected void UserAddedHandler(object sender, UserEventArgs userEventArgs)
         {
+
         }
 
         protected void UserDeletedHandler(object sender, UserEventArgs userEventArgs)
@@ -37,7 +33,7 @@ namespace BLL
             throw new NotImplementedException();
         }
 
-        public SlaveUserService(IUserRepository userRepository, IUserService userService, ILogger logger)
+        public SlaveUserService(IUserRepository userRepository, UserService userService)
         {
             if (userRepository == null || userService == null)
                 throw new ArgumentNullException();
@@ -46,25 +42,17 @@ namespace BLL
             userService.UserAdded += UserAddedHandler;
             userService.UserDeleted += UserDeletedHandler;
             this.userRepository = userRepository;
-            this.logger = logger;
         }
 
-        public int AddUser(User user)
+        public override int AddUser(User user)
         {
-            logger.Error("Slave can't add users");
             throw new InvalidOperationException("Slave can't add users");
         }
 
-        public void DeleteUser(User user)
+        public override void DeleteUser(User user)
         {
-            logger.Error("Slave can't delete users");
             throw new InvalidOperationException("Slave can't delete users");
         }
 
-        public IEnumerable<int> FindUser(Func<User, bool>[] funcs)
-        {
-            logger.Info("Slave find users by keys");
-            return userRepository.GetUsersIdsByPredicate(funcs);
-        }
     }
 }
