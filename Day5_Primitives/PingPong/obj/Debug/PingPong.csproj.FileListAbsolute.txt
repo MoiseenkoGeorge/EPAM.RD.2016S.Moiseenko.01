@@ -1,0 +1,6 @@
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day5_Primitives\PingPong\bin\Debug\PingPong.exe.config
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day5_Primitives\PingPong\bin\Debug\PingPong.exe
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day5_Primitives\PingPong\bin\Debug\PingPong.pdb
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day5_Primitives\PingPong\obj\Debug\PingPong.csprojResolveAssemblyReference.cache
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day5_Primitives\PingPong\obj\Debug\PingPong.exe
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day5_Primitives\PingPong\obj\Debug\PingPong.pdb
