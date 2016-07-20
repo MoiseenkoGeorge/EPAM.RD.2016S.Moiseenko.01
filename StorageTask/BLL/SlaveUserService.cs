@@ -14,7 +14,17 @@ namespace BLL
 
         public bool IsMaster => false;
 
-        public event EventHandler<UserEventArgs> UserAdded;
+        public event EventHandler<UserEventArgs> UserAdded
+        {
+            add
+            {
+                throw new InvalidOperationException();
+            }
+            remove
+            {
+                throw new InvalidOperationException();
+            }
+        }
         public event EventHandler<UserEventArgs> UserDeleted;
 
         

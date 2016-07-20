@@ -1,0 +1,5 @@
+D:\George_Moiseenko\temp\Day5_Primitives\MutexMain\bin\Debug\MutexMain.exe.config
+D:\George_Moiseenko\temp\Day5_Primitives\MutexMain\bin\Debug\MutexMain.exe
+D:\George_Moiseenko\temp\Day5_Primitives\MutexMain\bin\Debug\MutexMain.pdb
+D:\George_Moiseenko\temp\Day5_Primitives\MutexMain\obj\Debug\MutexMain.exe
+D:\George_Moiseenko\temp\Day5_Primitives\MutexMain\obj\Debug\MutexMain.pdb

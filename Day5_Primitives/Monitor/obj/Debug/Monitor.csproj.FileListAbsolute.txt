@@ -1,0 +1,6 @@
+D:\George_Moiseenko\temp\Day5_Primitives\Monitor\bin\Debug\Monitor.exe.config
+D:\George_Moiseenko\temp\Day5_Primitives\Monitor\bin\Debug\Monitor.exe
+D:\George_Moiseenko\temp\Day5_Primitives\Monitor\bin\Debug\Monitor.pdb
+D:\George_Moiseenko\temp\Day5_Primitives\Monitor\obj\Debug\Monitor.csprojResolveAssemblyReference.cache
+D:\George_Moiseenko\temp\Day5_Primitives\Monitor\obj\Debug\Monitor.exe
+D:\George_Moiseenko\temp\Day5_Primitives\Monitor\obj\Debug\Monitor.pdb

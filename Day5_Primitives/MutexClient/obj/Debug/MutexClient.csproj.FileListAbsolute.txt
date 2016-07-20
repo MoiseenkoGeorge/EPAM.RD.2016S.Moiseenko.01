@@ -1,0 +1,5 @@
+D:\George_Moiseenko\temp\Day5_Primitives\MutexClient\bin\Debug\MutexClient.exe.config
+D:\George_Moiseenko\temp\Day5_Primitives\MutexClient\bin\Debug\MutexClient.exe
+D:\George_Moiseenko\temp\Day5_Primitives\MutexClient\bin\Debug\MutexClient.pdb
+D:\George_Moiseenko\temp\Day5_Primitives\MutexClient\obj\Debug\MutexClient.exe
+D:\George_Moiseenko\temp\Day5_Primitives\MutexClient\obj\Debug\MutexClient.pdb

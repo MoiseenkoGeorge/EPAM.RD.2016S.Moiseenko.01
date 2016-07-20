@@ -1,0 +1,9 @@
+D:\George_Moiseenko\temp\Day5_Primitives\ReadWrite\bin\Debug\ReadWrite.exe.config
+D:\George_Moiseenko\temp\Day5_Primitives\ReadWrite\bin\Debug\ReadWrite.exe
+D:\George_Moiseenko\temp\Day5_Primitives\ReadWrite\bin\Debug\ReadWrite.pdb
+D:\George_Moiseenko\temp\Day5_Primitives\ReadWrite\obj\Debug\ReadWrite.csprojResolveAssemblyReference.cache
+D:\George_Moiseenko\temp\Day5_Primitives\ReadWrite\obj\Debug\ReadWrite.exe
+D:\George_Moiseenko\temp\Day5_Primitives\ReadWrite\obj\Debug\ReadWrite.pdb
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day5_Primitives\ReadWrite\bin\Debug\ReadWrite.exe.config
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day5_Primitives\ReadWrite\obj\Debug\ReadWrite.exe
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day5_Primitives\ReadWrite\obj\Debug\ReadWrite.pdb
