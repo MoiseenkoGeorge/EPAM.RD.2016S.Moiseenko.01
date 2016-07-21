@@ -4,3 +4,6 @@ D:\George_Moiseenko\temp\Day6_LINQ\temp\bin\Debug\temp.pdb
 D:\George_Moiseenko\temp\Day6_LINQ\temp\obj\Debug\temp.csprojResolveAssemblyReference.cache
 D:\George_Moiseenko\temp\Day6_LINQ\temp\obj\Debug\temp.exe
 D:\George_Moiseenko\temp\Day6_LINQ\temp\obj\Debug\temp.pdb
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day6_LINQ\temp\bin\Debug\temp.exe.config
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day6_LINQ\temp\obj\Debug\temp.exe
+D:\George_Moiseenko\EPAM.RD.2016S.Moiseenko.02\Day6_LINQ\temp\obj\Debug\temp.pdb

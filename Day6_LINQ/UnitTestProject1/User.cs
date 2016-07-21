@@ -21,14 +21,14 @@
             return Name == userObj.Name && Age == userObj.Age && Salary == userObj.Salary && Gender ==userObj.Gender;
         }
 
-        //public override int GetHashCode()
-        //{
-        //    return ToString().GetHashCode();
-        //}
-
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return ToString().GetHashCode();
         }
+
+        //public override int GetHashCode()
+        //{
+        //    return base.GetHashCode();
+        //}
     }
 }

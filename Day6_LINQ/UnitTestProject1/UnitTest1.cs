@@ -324,21 +324,22 @@ namespace UnitTestProject1
 
             var actualList = userListSecond.Join(NameInfo, u => u.Name, a => a.name, (u, a) => new
             {
-                Name = u.Name,
-                Info = a.Info,
                 Age = u.Age,
                 Gender = u.Gender,
-                Salary = u.Salary
+                Name = u.Name,
+                Salary = u.Salary,
+                Info = a.Info
             }).Distinct().ToList();
 
 
             var expectedlist = new[]
             {
-                new {Age = 23, Gender = Gender.Man, Name = "Max", Salary = 24000, Info = "info about Max"},
-                new {Age = 45, Gender = Gender.Man, Name = "Alex", Salary = 54000, Info = "About Alex"}
+                new {Age = 23, Gender = Gender.Man, Name = "Max", Salary = 24000m, Info = "info about Max"},
+                new {Age = 45, Gender = Gender.Man, Name = "Alex", Salary = 54000m, Info = "About Alex"}
             }.ToList();
 
-            Assert.AreEqual(actualList,expectedData);
+          
+            CollectionAssert.AreEquivalent(actualList,expectedlist);
         }
     }
 }
