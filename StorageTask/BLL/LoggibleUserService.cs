@@ -15,17 +15,6 @@ namespace BLL
         private readonly UserService userService;
 
         public override bool IsMaster => userService.IsMaster;
-        public override event EventHandler<UserEventArgs> UserAdded
-        {
-            add { userService.UserAdded += value; }
-            remove { userService.UserDeleted -= value; }
-        }
-
-        public override event EventHandler<UserEventArgs> UserDeleted
-        {
-            add { UserDeleted += value; }
-            remove { UserDeleted -= value; }
-        }
 
         public LoggibleUserService(ILogger logger, UserService userService)
         {
@@ -33,22 +22,37 @@ namespace BLL
             this.userService = userService;
         }
 
+
         public override int AddUser(User user)
         {
+            int result;
             try
             {
-                userService.AddUser(user);
+                logger.SendMessage(TraceEventType.Information, "try to add new user");
+                result = userService.AddUser(user);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                
+                logger.SendMessage(TraceEventType.Error, $"error when add user : {e.Message}");
                 throw;
             }
+            logger.SendMessage(TraceEventType.Information, $"addition of user is complete, his id - {result}");
+            return result;
         }
 
         public override void DeleteUser(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                logger.SendMessage(TraceEventType.Information, "try to delete user");
+                userService.DeleteUser(user);
+            }
+            catch (Exception e)
+            {
+                logger.SendMessage(TraceEventType.Error, $"error when delete user : {e.Message}");
+                throw;
+            }
+            logger.SendMessage(TraceEventType.Information, "delete of user is complete");
         }
 
         public override IEnumerable<int> FindUsers(Func<User, bool>[] funcs)

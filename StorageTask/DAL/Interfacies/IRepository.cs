@@ -12,6 +12,16 @@ namespace DAL.Interfacies
 
         TEntity GetByPredicate(Func<TEntity, bool> func);
 
+        /// <summary>
+        /// Attach entity to local storage
+        /// </summary>
+        void Attach(TEntity entity);
+
+        /// <summary>
+        /// Detach entity to local storage
+        /// </summary>
+        void Detach(TEntity entity);
+
         int Create(TEntity entity);
 
         void Delete(TEntity entity);

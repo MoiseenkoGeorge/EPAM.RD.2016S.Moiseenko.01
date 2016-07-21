@@ -1,0 +1,8 @@
+D:\George_Moiseenko\temp\Day7\ConstTask\TaskConsole\TaskConsole\bin\Debug\TaskConsole.exe.config
+D:\George_Moiseenko\temp\Day7\ConstTask\TaskConsole\TaskConsole\bin\Debug\TaskConsole.exe
+D:\George_Moiseenko\temp\Day7\ConstTask\TaskConsole\TaskConsole\bin\Debug\TaskConsole.pdb
+D:\George_Moiseenko\temp\Day7\ConstTask\TaskConsole\TaskConsole\bin\Debug\MyClassLibrary.dll
+D:\George_Moiseenko\temp\Day7\ConstTask\TaskConsole\TaskConsole\bin\Debug\MyClassLibrary.pdb
+D:\George_Moiseenko\temp\Day7\ConstTask\TaskConsole\TaskConsole\obj\Debug\TaskConsole.csprojResolveAssemblyReference.cache
+D:\George_Moiseenko\temp\Day7\ConstTask\TaskConsole\TaskConsole\obj\Debug\TaskConsole.exe
+D:\George_Moiseenko\temp\Day7\ConstTask\TaskConsole\TaskConsole\obj\Debug\TaskConsole.pdb

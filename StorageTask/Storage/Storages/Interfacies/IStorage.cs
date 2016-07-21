@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Entities;
 using Entities.Interfacies;
 
 namespace Storage.Storages.Interfacies
@@ -12,6 +13,8 @@ namespace Storage.Storages.Interfacies
         void Delete(int id);
 
         IEnumerable<int> Search(Func<TEntity, bool>[] funcs);
+
+        IEnumerable<User> GetAll(); 
 
         void Save();
 

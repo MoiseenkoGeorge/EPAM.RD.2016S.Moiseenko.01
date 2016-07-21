@@ -15,21 +15,6 @@ namespace BLL
     {
         public override bool IsMaster => true;
 
-        public override event EventHandler<UserEventArgs> UserAdded = delegate { };
-        public override event EventHandler<UserEventArgs> UserDeleted = delegate { };
-
-        protected virtual void OnUserAdded(UserEventArgs e)
-        {
-            EventHandler<UserEventArgs> temp = Volatile.Read(ref UserAdded);
-            temp.Invoke(this,e);
-        }
-
-        protected virtual void OnUserDeleted(UserEventArgs e)
-        {
-            EventHandler<UserEventArgs> temp = Volatile.Read(ref UserDeleted);
-            temp.Invoke(this, e);
-        }
-
         public MasterUserService(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
@@ -37,21 +22,13 @@ namespace BLL
 
         public override int AddUser(User user)
         {
-            int result = 0;
-            result = userRepository.Create(user);
-            OnUserAdded(new UserEventArgs(user));
+            var result = userRepository.Create(user);
             return result;
         }
 
         public override void DeleteUser(User user)
         {
             userRepository.Delete(user);
-            OnUserDeleted(new UserEventArgs(user));
-        }
-
-        public IEnumerable<int> FindUser(Func<User, bool>[] funcs)
-        {
-            return userRepository.GetUsersIdsByPredicate(funcs);
         }
     }
 }

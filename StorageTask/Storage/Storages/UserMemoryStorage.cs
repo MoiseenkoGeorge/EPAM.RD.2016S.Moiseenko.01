@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -56,6 +55,11 @@ namespace Storage.Storages
         public IEnumerable<int> Search(Func<User, bool>[] funcs)
         {
             return storage.Where(u => funcs.All(f => f(u))).Select(u => u.Id);
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            return storage;
         }
 
         public void Save()

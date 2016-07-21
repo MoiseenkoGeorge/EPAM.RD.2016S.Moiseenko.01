@@ -1,0 +1,6 @@
+D:\George_Moiseenko\temp\Day7\UnitTestProjectCollection\expressionTask\bin\Debug\expressionTask.exe.config
+D:\George_Moiseenko\temp\Day7\UnitTestProjectCollection\expressionTask\bin\Debug\expressionTask.exe
+D:\George_Moiseenko\temp\Day7\UnitTestProjectCollection\expressionTask\bin\Debug\expressionTask.pdb
+D:\George_Moiseenko\temp\Day7\UnitTestProjectCollection\expressionTask\obj\Debug\expressionTask.csprojResolveAssemblyReference.cache
+D:\George_Moiseenko\temp\Day7\UnitTestProjectCollection\expressionTask\obj\Debug\expressionTask.exe
+D:\George_Moiseenko\temp\Day7\UnitTestProjectCollection\expressionTask\obj\Debug\expressionTask.pdb
