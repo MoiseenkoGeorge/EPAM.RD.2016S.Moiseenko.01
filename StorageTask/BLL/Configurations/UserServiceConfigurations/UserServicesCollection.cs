@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace BLL.Configurations
+namespace BLL.Configurations.UserServiceConfigurations
 {
     [ConfigurationCollection(typeof(UserServiceElement), AddItemName = "Service")]
     class UserServicesCollection : ConfigurationElementCollection

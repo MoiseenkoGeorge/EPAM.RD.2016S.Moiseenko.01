@@ -12,7 +12,7 @@ using Storage.Validators.Interfacies;
 
 namespace Storage.Storages
 {
-    public class UserMemoryStorage : IUserStorage
+    public class UserMemoryStorage : MarshalByRefObject, IUserStorage
     {
         private readonly string filePath;
 

@@ -7,7 +7,7 @@ using Storage.Storages.Interfacies;
 
 namespace DAL
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : MarshalByRefObject, IUserRepository
     {
         private readonly IUserStorage userStorage;
 

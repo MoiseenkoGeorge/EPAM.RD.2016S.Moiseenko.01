@@ -41,9 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configurations\UserServiceConfigurator.cs" />
-    <Compile Include="Configurations\UserServiceElement.cs" />
-    <Compile Include="Configurations\UserServicesCollection.cs" />
+    <Compile Include="Configurations\UserServiceConfigurations\UserServiceConfigurator.cs" />
+    <Compile Include="Configurations\UserServiceConfigurations\UserServiceElement.cs" />
+    <Compile Include="Configurations\UserServiceConfigurations\UserServicesCollection.cs" />
     <Compile Include="Loggers\Interfacies\ILogger.cs" />
     <Compile Include="Loggers\Logger.cs" />
     <Compile Include="LoggibleUserService.cs" />
@@ -51,10 +51,12 @@
     <Compile Include="Interfacies\IService.cs" />
     <Compile Include="Interfacies\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Network\Interfacies\ITransmitter.cs" />
+    <Compile Include="Services\Network\Interfacies\IUserTransmitter.cs" />
     <Compile Include="Services\Network\UdpReceiver.cs" />
     <Compile Include="Services\Network\UdpSender.cs" />
     <Compile Include="SlaveUserService.cs" />
-    <Compile Include="Configurations\UserServiceConfigSection.cs" />
+    <Compile Include="Configurations\UserServiceConfigurations\UserServiceConfigSection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
@@ -64,6 +66,10 @@
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{ba1da19c-463e-4046-8247-0a0660dc1e62}</Project>
       <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Storage\Storage.csproj">
+      <Project>{726d5631-200d-4c94-a3d8-5eb511470e52}</Project>
+      <Name>Storage</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,11 +4,13 @@ using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
+using BLL.Services.Network.Interfacies;
 using Entities;
 
 namespace BLL.Services.Network
 {
-    public class UdpReceiver
+    [Serializable]
+    public sealed class UdpReceiver : IDisposable, IUserTransmitter
     {
         private readonly Socket socket;
 
@@ -16,31 +18,37 @@ namespace BLL.Services.Network
 
         private readonly BinaryFormatter binaryFormatter;
 
-        private object locker = new object();
+        private readonly object locker = new object();
 
-        public bool IsActivate { get; }
+        public bool IsActivate { get; private set; }
 
         public event EventHandler<UserEventArgs> UserAdded = delegate { };
 
         public event EventHandler<UserEventArgs> UserDeleted = delegate { }; 
 
-        public UdpReceiver(int port)
+        public UdpReceiver(string ipAddress,int port)
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
-            broadcastIpEndPoint = new IPEndPoint(IPAddress.Broadcast, port);
+            broadcastIpEndPoint = new IPEndPoint(IPAddress.Any, port);
             socket.Bind(broadcastIpEndPoint);
             binaryFormatter = new BinaryFormatter();
         }
 
-        public void Init()
+        public void SendData(MessageType messageType, User entity)
+        {
+            throw new InvalidOperationException("receiver doesn't send data");
+        }
+
+        public void ReceiveData()
         {
             lock (locker)
             {
                 if (!IsActivate)
                 {
-                    Thread thread = new Thread(Receive);
+                    var thread = new Thread(InitReceive);
                     thread.Start();
+                    IsActivate = true;
                 }
                 else
                 {
@@ -49,19 +57,25 @@ namespace BLL.Services.Network
             }
         }
 
-        private void Receive()
+        public void Dispose()
         {
-            byte[] buffer = {};
+            socket.Shutdown(SocketShutdown.Both);
+            socket.Dispose();
+        }
+
+        private void InitReceive()
+        {
+            byte[] buffer = new byte[10240];
             EndPoint remotEndPoint = broadcastIpEndPoint;
             try
             {
                 while (true)
                 {
-                    var data = socket.ReceiveFrom(buffer, ref remotEndPoint);
-                    using (var ms = new MemoryStream(data))
+                    var bytesReead = socket.ReceiveFrom(buffer, ref remotEndPoint);
+                    using (var ms = new MemoryStream(buffer))
                     {
                         var packet = (Packet<User>)binaryFormatter.Deserialize(ms);
-                        if (packet.MessageType == MessageType.UserAdded)
+                        if (packet.MessageType == MessageType.TypeAdded)
                         {
                             OnUserAdded(new UserEventArgs(packet.entity));
                         }
@@ -72,24 +86,23 @@ namespace BLL.Services.Network
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return;
             }
         }
 
-        protected virtual void OnUserAdded(UserEventArgs e)
+        private void OnUserAdded(UserEventArgs e)
         {
             EventHandler<UserEventArgs> temp = Volatile.Read(ref UserAdded);
             temp.Invoke(this, e);
         }
 
-        protected virtual void OnUserDeleted(UserEventArgs e)
+        private void OnUserDeleted(UserEventArgs e)
         {
             EventHandler<UserEventArgs> temp = Volatile.Read(ref UserDeleted);
             temp.Invoke(this, e);
         }
-
     }
 
 

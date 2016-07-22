@@ -39,6 +39,7 @@
     <Reference Include="System.configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NetworkServiceTests.cs" />
     <Compile Include="UserServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

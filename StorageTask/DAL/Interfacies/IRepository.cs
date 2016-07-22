@@ -18,7 +18,7 @@ namespace DAL.Interfacies
         void Attach(TEntity entity);
 
         /// <summary>
-        /// Detach entity to local storage
+        /// Detach entity from local storage
         /// </summary>
         void Detach(TEntity entity);
 
