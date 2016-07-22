@@ -7,7 +7,6 @@ using BLL.Services.Network;
 using BLL.Services.Network.Interfacies;
 using DAL;
 using DAL.Interfacies;
-using Storage.Storages;
 using Storage.Storages.Interfacies;
 
 namespace BLL.Configurations.UserServiceConfigurations
@@ -30,7 +29,7 @@ namespace BLL.Configurations.UserServiceConfigurations
 
             this.userStorage = userStorage;
 
-            section = (UserServiceConfigSection)ConfigurationManager.GetSection("UserServices");
+            section = (BLL.Configurations.UserServiceConfigurations.UserServiceConfigSection)ConfigurationManager.GetSection("UserServices");
 
             if (section == null)
             {
