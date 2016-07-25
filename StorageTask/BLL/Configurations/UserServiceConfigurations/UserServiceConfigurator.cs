@@ -3,6 +3,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using BLL.Configurations.TransmitterServiceConfigurations;
 using BLL.Interfacies;
 using BLL.Services.Network;
 using BLL.Services.Network.Interfacies;
@@ -20,6 +21,7 @@ namespace BLL.Configurations.UserServiceConfigurations
         private readonly int countOfSlaves;
 
         private UserServiceConfigSection section;
+        private TransmitterServiceConfigurator tsc;
 
         public UserServiceConfigurator(IUserStorage userStorage)
         {
@@ -36,6 +38,8 @@ namespace BLL.Configurations.UserServiceConfigurations
             {
                 throw new InvalidOperationException("Section does not exist");
             }
+
+            tsc = new TransmitterServiceConfigurator();
 
             UserServiceElement[] userServiceElements = section.UserServiceItems.Cast<UserServiceElement>().ToArray();
 
@@ -86,22 +90,19 @@ namespace BLL.Configurations.UserServiceConfigurations
                 PrivateBinPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MyDomain")
             };
             AppDomain domain = AppDomain.CreateDomain(serviceConfig.AppDomainName + serviceConfig.Name,null,appDomainSetup);
-
-            var a = AppDomain.CurrentDomain.GetAssemblies();
             domain.Load("BLL");
 
             UserRepository userRepository = (UserRepository)domain.CreateInstanceAndUnwrap("DAL", "DAL.UserRepository",
                 false, BindingFlags.CreateInstance | BindingFlags.Public | BindingFlags.Instance,
                 null, new object[] { userStorage }, null, null);
 
-            if (serviceConfig.IsMaster)
-            {
-                IUserTransmitter userTransmitter =
-                    () domain.CreateInstanceAndUnwrap("BLL", serviceConfig.Transmitter,
-                        false, BindingFlags.CreateInstance | BindingFlags.Public | BindingFlags.Instance,
-                        null, new object[] {}, null, null);
-            }
-            return null;
+            IUserTransmitter userTransmitter = tsc.GetTransmitter(serviceConfig.TransmitterName,domain);
+
+            var typeName = serviceConfig.IsMaster ? "BLL.MasterUserService" : "BLL.SlaveUserService";
+
+            UserService userService = (UserService)domain.CreateInstanceAndUnwrap("BLL",typeName, false, BindingFlags.CreateInstance | BindingFlags.Public | BindingFlags.Instance,
+                null, new object[] { serviceConfig.Name, userRepository, userTransmitter }, null, null);
+            return new LoggibleUserService();
         }
     }
 }

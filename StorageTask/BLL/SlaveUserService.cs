@@ -13,7 +13,7 @@ namespace BLL
     {
         public override bool IsMaster => false;
 
-        public SlaveUserService(IUserRepository userRepository, IUserTransmitter transmitter)
+        public SlaveUserService(string name, IUserRepository userRepository, IUserTransmitter transmitter) : base(name)
         {
             if (userRepository == null || transmitter == null)
                 throw new ArgumentNullException();

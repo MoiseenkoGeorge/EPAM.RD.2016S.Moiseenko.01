@@ -10,7 +10,7 @@ using Entities;
 namespace BLL.Services.Network
 {
     [Serializable]
-    public class BroadcastSender : IDisposable, IUserTransmitter
+    public class BroadcastSender : MarshalByRefObject, IDisposable, IUserTransmitter
     {
         private readonly Socket socket;
         private readonly IPEndPoint ipEndPoint;

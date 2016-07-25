@@ -16,7 +16,7 @@ namespace BLL
 
         public override bool IsMaster => userService.IsMaster;
 
-        public LoggibleUserService(ILogger logger, UserService userService)
+        public LoggibleUserService(ILogger logger, UserService userService) : base(userService.Name)
         {
             this.logger = logger;
             this.userService = userService;

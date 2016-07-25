@@ -19,6 +19,10 @@ namespace BLL.Interfacies
         public abstract int AddUser(User user);
         public abstract void DeleteUser(User user);
 
+        protected UserService(string name)
+        {
+            this.name = name;
+        }
         public virtual IEnumerable<int> FindUsers(Func<User, bool>[] funcs)
         {
             return userRepository.GetUsersIdsByPredicate(funcs);

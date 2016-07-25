@@ -26,7 +26,7 @@ namespace BLL.Configurations.UserServiceConfigurations
         }
 
         [ConfigurationProperty("transmitterName", IsKey = false, IsRequired = true)]
-        public string Transmitter
+        public string TransmitterName
         {
             get { return ((string) (base["transmitterName"])); }
             set { base["transmitterNames"] = value; }

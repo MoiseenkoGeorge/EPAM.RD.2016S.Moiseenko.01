@@ -16,11 +16,10 @@ namespace BLL
     {
         public override bool IsMaster => true;
 
-        public MasterUserService(string name, IUserRepository userRepository, IUserTransmitter transmitter)
+        public MasterUserService(string name, IUserRepository userRepository, IUserTransmitter transmitter) : base(name)
         {
             if(userRepository == null || transmitter == null)
                 throw new ArgumentNullException();
-            //this.name = ""
             this.userRepository = userRepository;
             this.transmitter = transmitter;
         }
