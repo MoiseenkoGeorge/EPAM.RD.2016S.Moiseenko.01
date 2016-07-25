@@ -10,7 +10,7 @@ using Entities;
 namespace BLL.Services.Network
 {
     [Serializable]
-    public sealed class UdpReceiver : IDisposable, IUserTransmitter
+    public sealed class BroadcastReceiver : IDisposable, IUserTransmitter
     {
         private readonly Socket socket;
 
@@ -26,7 +26,7 @@ namespace BLL.Services.Network
 
         public event EventHandler<UserEventArgs> UserDeleted = delegate { }; 
 
-        public UdpReceiver(string ipAddress,int port)
+        public BroadcastReceiver(int port)
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
@@ -71,7 +71,7 @@ namespace BLL.Services.Network
             {
                 while (true)
                 {
-                    var bytesReead = socket.ReceiveFrom(buffer, ref remotEndPoint);
+                    var bytesRead = socket.ReceiveFrom(buffer, ref remotEndPoint);
                     using (var ms = new MemoryStream(buffer))
                     {
                         var packet = (Packet<User>)binaryFormatter.Deserialize(ms);

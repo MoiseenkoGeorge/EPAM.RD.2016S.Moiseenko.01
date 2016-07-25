@@ -25,11 +25,11 @@ namespace BLL.Configurations.UserServiceConfigurations
             set { base["appDomainName"] = value; }
         }
 
-        [ConfigurationProperty("transmitter", IsKey = false, IsRequired = true)]
+        [ConfigurationProperty("transmitterName", IsKey = false, IsRequired = true)]
         public string Transmitter
         {
-            get { return ((string) (base["transmitter"])); }
-            set { base["transmitter"] = value; }
+            get { return ((string) (base["transmitterName"])); }
+            set { base["transmitterNames"] = value; }
         }
     }
 }

@@ -10,7 +10,7 @@ using Entities;
 namespace BLL.Services.Network
 {
     [Serializable]
-    public class UdpSender : IDisposable, IUserTransmitter
+    public class BroadcastSender : IDisposable, IUserTransmitter
     {
         private readonly Socket socket;
         private readonly IPEndPoint ipEndPoint;
@@ -27,12 +27,11 @@ namespace BLL.Services.Network
             remove { throw new InvalidOperationException(); }
         }
 
-        public UdpSender(string ipAddress ,int port)
+        public BroadcastSender(int port)
         {
             socket = new Socket(AddressFamily.InterNetwork,SocketType.Dgram, ProtocolType.Udp);
-            if(ipAddress == IPAddress.Broadcast.ToString())
-                socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
-            ipEndPoint = new IPEndPoint(IPAddress.Parse(ipAddress), port);
+            socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
+            ipEndPoint = new IPEndPoint(IPAddress.Broadcast, port);
             bf = new BinaryFormatter();
         }
 

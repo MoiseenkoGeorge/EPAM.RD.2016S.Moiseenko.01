@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using BLL.Interfacies;
@@ -51,40 +52,11 @@ namespace BLL.Configurations.UserServiceConfigurations
             this.countOfSlaves = countOfSlaves;
         }
 
-        //public UserService[] GetServices()
-        //{
-        //    if (countOfMasters != 1)
-        //    {
-        //        throw new InvalidOperationException();
-        //    }
-
-        //    if (countOfSlaves < 1)
-        //    {
-        //        throw new InvalidOperationException("Require at least one slave");
-        //    }
-
-        //    UserService[] services = new UserService[countOfMasters + countOfSlaves];
-
-        //    services[0] = new MasterUserService(userRepository, new UdpSender("255.255.255.255",11000));
-
-        //    for (int i = 0; i < countOfSlaves; i++)
-        //    {
-        //        services[i + 1] = new SlaveUserService(userRepository, new UdpReceiver("255.255.255.255", 11000));
-        //    }
-
-        //    return services;
-        //}
-
         public LoggibleUserService[] GetUserServices()
         {
             if (countOfMasters != 1)
             {
                 throw new InvalidOperationException();
-            }
-
-            if (countOfSlaves < 1)
-            {
-                throw new InvalidOperationException("Require at least one slave");
             }
 
             UserServiceElement[] userServiceElements = section.UserServiceItems.Cast<UserServiceElement>().ToArray();
@@ -108,8 +80,14 @@ namespace BLL.Configurations.UserServiceConfigurations
 
         private LoggibleUserService CreateUserService(IUserStorage userStorage, UserServiceElement serviceConfig)
         {
-            AppDomain domain = AppDomain.CreateDomain(serviceConfig.AppDomainName + serviceConfig.Name);
+            var appDomainSetup = new AppDomainSetup
+            {
+                ApplicationBase = AppDomain.CurrentDomain.BaseDirectory,
+                PrivateBinPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MyDomain")
+            };
+            AppDomain domain = AppDomain.CreateDomain(serviceConfig.AppDomainName + serviceConfig.Name,null,appDomainSetup);
 
+            var a = AppDomain.CurrentDomain.GetAssemblies();
             domain.Load("BLL");
 
             UserRepository userRepository = (UserRepository)domain.CreateInstanceAndUnwrap("DAL", "DAL.UserRepository",
@@ -119,7 +97,7 @@ namespace BLL.Configurations.UserServiceConfigurations
             if (serviceConfig.IsMaster)
             {
                 IUserTransmitter userTransmitter =
-                    (UdpSender) domain.CreateInstanceAndUnwrap("BLL", serviceConfig.Transmitter,
+                    () domain.CreateInstanceAndUnwrap("BLL", serviceConfig.Transmitter,
                         false, BindingFlags.CreateInstance | BindingFlags.Public | BindingFlags.Instance,
                         null, new object[] {}, null, null);
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Net;
 using System.Threading;
 using BLL.Services.Network;
@@ -34,8 +35,8 @@ namespace BLL.Tests
                 Gender = Gender.Male
             };
             users = new List<User>();
-            sender = new UdpSender("255.255.255.255", 11000);
-            receiver = new UdpReceiver(IPAddress.Broadcast.ToString(), 11000);
+            sender = new BroadcastSender(int.Parse(ConfigurationManager.AppSettings["Port"]));
+            receiver = new BroadcastReceiver(11000);
             receiver.ReceiveData();
             receiver.UserAdded += (o, args) =>
             {

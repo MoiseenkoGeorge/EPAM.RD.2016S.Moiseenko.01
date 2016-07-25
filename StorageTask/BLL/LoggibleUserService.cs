@@ -22,7 +22,6 @@ namespace BLL
             this.userService = userService;
         }
 
-
         public override int AddUser(User user)
         {
             int result;

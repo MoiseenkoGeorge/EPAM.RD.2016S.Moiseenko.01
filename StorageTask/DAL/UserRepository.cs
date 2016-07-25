@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using DAL.Interfacies;
 using Entities;
 using Storage.Storages.Interfacies;
@@ -11,12 +12,15 @@ namespace DAL
     {
         private readonly IUserStorage userStorage;
 
-        private readonly ICollection<User> localUserStorage; 
+        private readonly ICollection<User> localUserStorage;
+
+        private readonly ReaderWriterLockSlim rwls;
 
         public UserRepository(IUserStorage userStorage)
         {
             this.userStorage = userStorage;
             this.localUserStorage = GetAllEntities().ToList();
+            rwls = new ReaderWriterLockSlim();
         }
 
         public IEnumerable<User> GetAllEntities()
@@ -36,21 +40,28 @@ namespace DAL
 
         public void Attach(User entity)
         {
+            rwls.EnterReadLock();
             var user = localUserStorage.SingleOrDefault(u => u.Id == entity.Id);
-            if(user == null)
+            rwls.ExitReadLock();
+            if (user == null)
+            {
+                rwls.EnterWriteLock();
                 localUserStorage.Add(entity);
+                rwls.ExitWriteLock();
+            }
             else throw new InvalidOperationException("The same user is already exists");
         }
 
         public void Detach(User entity)
         {
+            rwls.EnterReadLock();
             var user = localUserStorage.SingleOrDefault(u => u.Id == entity.Id);
+            rwls.ExitReadLock();
             if (user == null)
                 throw new InvalidOperationException("user is not exists");
-            else
-            {
-                localUserStorage.Remove(entity);
-            }
+            rwls.EnterWriteLock();
+            localUserStorage.Remove(entity);
+            rwls.ExitWriteLock();
         }
 
         public int Create(User entity)
