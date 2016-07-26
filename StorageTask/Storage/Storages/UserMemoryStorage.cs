@@ -59,7 +59,7 @@ namespace Storage.Storages
             rwls.EnterReadLock();
             try
             {
-                var user = storage.SingleOrDefault(u => u.Id == id);
+                var user = storage.FirstOrDefault(u => u.Id == id);
                 if (user == null)
                 {
                     throw new InvalidOperationException();

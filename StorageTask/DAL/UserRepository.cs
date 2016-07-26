@@ -44,7 +44,7 @@ namespace DAL
             rwls.EnterReadLock();
             try
             {
-                user = localUserStorage.SingleOrDefault(u => u.Id == entity.Id);
+                user = localUserStorage.FirstOrDefault(u => u.Id == entity.Id);
             }
             finally
             {
@@ -65,7 +65,7 @@ namespace DAL
             rwls.EnterReadLock();
             try
             {
-                user = localUserStorage.SingleOrDefault(u => u.Id == entity.Id);
+                user = localUserStorage.FirstOrDefault(u => u.Id == entity.Id);
             }
             finally
             {

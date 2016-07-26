@@ -38,7 +38,7 @@ namespace ConsoleTestApplication
             var logger = new Logger();
             var configurator = new UserServiceConfigurator(userStorage,logger);
             var userServices = configurator.GetUserServices();
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 Thread masterThread = new Thread(() =>
                 {
@@ -54,7 +54,7 @@ namespace ConsoleTestApplication
                 });
                 masterThread.Start();
             }
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Thread slave1Thread = new Thread(() =>
                 {

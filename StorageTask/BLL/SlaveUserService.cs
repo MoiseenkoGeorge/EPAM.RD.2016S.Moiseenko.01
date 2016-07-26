@@ -35,12 +35,28 @@ namespace BLL
 
         private void AttachUser(object sender, UserEventArgs eventArgs)
         {
-            userRepository.Attach(eventArgs.User);
+            rwls.EnterWriteLock();
+            try
+            {
+                userRepository.Attach(eventArgs.User);
+            }
+            finally
+            {
+                rwls.ExitWriteLock();
+            }
         }
 
         private void DetachUser(object sender, UserEventArgs eventArgs)
         {
-            userRepository.Detach(eventArgs.User);
+            rwls.EnterWriteLock();
+            try
+            {
+                userRepository.Detach(eventArgs.User);
+            }
+            finally
+            {
+                rwls.ExitWriteLock();
+            }
         }
     }
 }
