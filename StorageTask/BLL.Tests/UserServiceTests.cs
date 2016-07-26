@@ -14,19 +14,26 @@ using Entities;
 using System.Diagnostics;
 using BLL.Configurations;
 using BLL.Configurations.UserServiceConfigurations;
+using BLL.Loggers;
+using BLL.Loggers.Interfacies;
+using Storage.Storages.Interfacies;
 
 namespace BLL.Tests
 {
+    [Serializable]
     [TestFixture]
     public class UserServiceTests
     {
-        private IUserRepository userRepository;
+        private IUserStorage userStorage;
+        private ILogger logger;
 
         private User validUser;
         [SetUp]
         public void Init()
         {
-            userRepository = new UserRepository(new UserMemoryStorage(new Generator(), new Validator(), ConfigurationManager.AppSettings["FileName"]));
+            //userStorage = AppDomain.CurrentDomain.CreateInstanceAndUnwrap("")
+            userStorage = new UserMemoryStorage(new Generator(), new Validator(), ConfigurationManager.AppSettings["FileName"]);
+            logger = new Logger();
             validUser = new User()
             {
                 FirstName = "asd",
@@ -38,51 +45,53 @@ namespace BLL.Tests
 
         [Test]
         public void UserService_CreateUserServicesFromAppconfig_ReturnAllGood()
+        { 
+            var configurator = new UserServiceConfigurator(userStorage,logger);
+            var userServices = configurator.GetUserServices();
+
+        }
+
+
+        [Test]
+        public void UserService_CreateUserServicesWithTwoMasters_ReturnAnException()
         {
-            var storage = new UserMemoryStorage(new Generator(), new Validator(), ConfigurationManager.AppSettings["FileName"]);
-            var configurator = new UserServiceConfigurator(storage);
-            configurator.GetUserServices();
-        } 
+            var userServiceConfigurator = new UserServiceConfigurator(userStorage,logger, 2, 2);
+            Assert.Throws<InvalidOperationException>(() => userServiceConfigurator.GetUserServices());
+        }
 
+        [Test]
+        public void UserService_CreateTwoUserServicesFromAppConfig_ReturnThreeServices()
+        {
+            var configurator = new UserServiceConfigurator(userStorage, logger);
+            var result = configurator.GetUserServices();
+            Assert.AreEqual(3, result.Length);
+        }
 
-        //[Test]
-        //public void UserService_CreateUserServicesWithTwoMasters_ReturnAnException()
-        //{
-        //    var userServiceConfigurator = new UserServiceConfigurator(userRepository,2,2);
-        //    Assert.Throws<InvalidOperationException>(() => userServiceConfigurator.GetServices());
-        //}
+        [Test]
+        public void UserService_AddUserThrowSlaveUserService_ThrowAnException()
+        {
+            var configurator = new UserServiceConfigurator(userStorage,logger);
+            var result = configurator.GetUserServices();
+            Assert.Throws<InvalidOperationException>(() => result[1].AddUser(validUser));
+        }
 
-        //[Test]
-        //public void UserService_CreateTwoUserServicesFromAppConfig_ReturnTwoServices()
-        //{
-        //    var configurator = new UserServiceConfigurator(userRepository);
-        //    var result = configurator.GetServices();
-        //    Assert.AreEqual(2, result.Length);
-        //}
+        [Test]
+        public void UserService_AddUserThrowMasterUserService_SlaveUserServiceAttachUser()
+        {
+            var configurator = new UserServiceConfigurator(userStorage,logger);
+            var result = configurator.GetUserServices();
+            result[0].AddUser(validUser);
+            Assert.AreEqual(0,result[1].FindUsers(new Func<User, bool>[] {u => u.FirstName == validUser.FirstName}).ToArray()[0]);
+        }
 
-        //[Test]
-        //public void UserService_AddUserThrowSlaveUserService_ThrowAnException()
-        //{
-        //    var configurator = new UserServiceConfigurator(userRepository);
-        //    var result = configurator.GetServices();
-        //    Assert.Throws<InvalidOperationException>(() => result[1].AddUser(validUser));
-        //}
-
-        //[Test]
-        //public void UserService_AddUserThrowMasterUserService_SlaveUserServiceHandleEvent()
-        //{
-        //    var configurator = new UserServiceConfigurator(userRepository);
-        //    var result = configurator.GetServices();
-        //    Assert.Throws<NotImplementedException>( ( ) => result[0].AddUser(validUser) );
-        //}
-
-        //[Test]
-        //public void UserService_DeleteUserThrowMasterUserService_SlaveUserServiceHandleEvent()
-        //{
-        //    var configurator = new UserServiceConfigurator(userRepository);
-        //    var result = configurator.GetServices();
-        //    result[0].AddUser(validUser);
-        //    Assert.Throws<NotImplementedException>(() => result[0].DeleteUser(validUser));
-        //}
+        [Test]
+        public void UserService_DeleteUserThrowMasterUserService_SlaveUserDetachUser()
+        {
+            var configurator = new UserServiceConfigurator(userStorage,logger);
+            var result = configurator.GetUserServices();
+            result[0].AddUser(validUser);
+            result[0].DeleteUser(validUser);
+            Assert.AreEqual(0,result[1].FindUsers(new Func<User, bool>[] { u => u.FirstName == validUser.FirstName }).Count); 
+        }
     }
 }

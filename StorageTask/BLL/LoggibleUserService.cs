@@ -54,7 +54,7 @@ namespace BLL
             logger.SendMessage(TraceEventType.Information, "delete of user is complete");
         }
 
-        public override IEnumerable<int> FindUsers(Func<User, bool>[] funcs)
+        public override List<int> FindUsers(Func<User, bool>[] funcs)
         {
             logger.SendMessage(TraceEventType.Information, "Find user by predicates");
             var result = userService.FindUsers(funcs);

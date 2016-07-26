@@ -12,7 +12,7 @@ namespace DAL
     {
         private readonly IUserStorage userStorage;
 
-        private readonly ICollection<User> localUserStorage;
+        private readonly List<User> localUserStorage;
 
         private readonly ReaderWriterLockSlim rwls;
 
@@ -83,9 +83,9 @@ namespace DAL
             throw new NotImplementedException();
         }
 
-        public IEnumerable<int> GetUsersIdsByPredicate(Func<User, bool>[] funcs)
+        public List<int> GetUsersIdsByPredicate(Func<User, bool>[] funcs)
         {
-            return localUserStorage.Where(u => funcs.All(f => f(u))).Select(u => u.Id);
+            return localUserStorage.Where(u => funcs.All(f => f(u))).Select(u => u.Id).ToList();
         }
     }
 }

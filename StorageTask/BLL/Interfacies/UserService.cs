@@ -6,7 +6,7 @@ using Entities;
 
 namespace BLL.Interfacies
 {
-    public abstract class UserService : IService
+    public abstract class UserService : MarshalByRefObject,IService
     {
         protected IUserRepository userRepository;
         protected ITransmitter<User> transmitter;
@@ -23,7 +23,7 @@ namespace BLL.Interfacies
         {
             this.name = name;
         }
-        public virtual IEnumerable<int> FindUsers(Func<User, bool>[] funcs)
+        public virtual List<int> FindUsers(Func<User, bool>[] funcs)
         {
             return userRepository.GetUsersIdsByPredicate(funcs);
         }

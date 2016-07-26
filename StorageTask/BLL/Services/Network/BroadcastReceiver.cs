@@ -9,7 +9,6 @@ using Entities;
 
 namespace BLL.Services.Network
 {
-    [Serializable]
     public sealed class BroadcastReceiver : MarshalByRefObject, IDisposable, IUserTransmitter
     {
         private readonly Socket socket;
@@ -29,10 +28,11 @@ namespace BLL.Services.Network
         public BroadcastReceiver(int port)
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-            socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
+            socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, 1);
             broadcastIpEndPoint = new IPEndPoint(IPAddress.Any, port);
             socket.Bind(broadcastIpEndPoint);
             binaryFormatter = new BinaryFormatter();
+            ReceiveData();
         }
 
         public void SendData(MessageType messageType, User entity)

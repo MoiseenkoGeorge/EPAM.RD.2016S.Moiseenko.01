@@ -27,7 +27,7 @@ namespace BLL.Configurations.TransmitterServiceConfigurations
                 throw new InvalidOperationException("Transmitter with the same name is not exists");
             var transmitter = (IUserTransmitter)domain.CreateInstanceAndUnwrap("BLL", transmitterElement.Value,
                 false, BindingFlags.CreateInstance | BindingFlags.Public | BindingFlags.Instance,
-                null, new object[] { ConfigurationManager.AppSettings["Port"] }, null, null);
+                null, new object[] { int.Parse(ConfigurationManager.AppSettings["Port"]) }, null, null);
             return transmitter;
         }
     }

@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace BLL.Loggers
 {
-    public class Logger : ILogger
+    public class Logger : MarshalByRefObject, ILogger
     {
         private readonly TraceSource traceSource;
         public bool IsActivated { get; }
