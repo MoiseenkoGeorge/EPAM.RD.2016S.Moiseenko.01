@@ -40,9 +40,16 @@ namespace DAL
 
         public void Attach(User entity)
         {
+            User user;
             rwls.EnterReadLock();
-            var user = localUserStorage.SingleOrDefault(u => u.Id == entity.Id);
-            rwls.ExitReadLock();
+            try
+            {
+                user = localUserStorage.SingleOrDefault(u => u.Id == entity.Id);
+            }
+            finally
+            {
+                rwls.ExitReadLock();
+            }
             if (user == null)
             {
                 rwls.EnterWriteLock();
@@ -54,9 +61,16 @@ namespace DAL
 
         public void Detach(User entity)
         {
+            User user;
             rwls.EnterReadLock();
-            var user = localUserStorage.SingleOrDefault(u => u.Id == entity.Id);
-            rwls.ExitReadLock();
+            try
+            {
+                user = localUserStorage.SingleOrDefault(u => u.Id == entity.Id);
+            }
+            finally
+            {
+                rwls.ExitReadLock();
+            }
             if (user == null)
                 throw new InvalidOperationException("user is not exists");
             rwls.EnterWriteLock();
@@ -75,7 +89,7 @@ namespace DAL
         public void Delete(User entity)
         {
             userStorage.Delete(entity.Id);
-            localUserStorage.Remove(entity);
+            Detach(entity);
         }
 
         public void Update(User entity)

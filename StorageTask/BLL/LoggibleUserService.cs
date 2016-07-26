@@ -58,7 +58,7 @@ namespace BLL
         {
             logger.SendMessage(TraceEventType.Information, "Find user by predicates");
             var result = userService.FindUsers(funcs);
-            logger.SendMessage(TraceEventType.Information, $"Searched {result.Count()} users");
+            logger.SendMessage(TraceEventType.Information, $"Find {result.Count()} users");
             return result;
         }
     }

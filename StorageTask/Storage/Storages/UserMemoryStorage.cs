@@ -56,11 +56,20 @@ namespace Storage.Storages
 
         public void Delete(int id)
         {
-            var user = storage.SingleOrDefault(u => u.Id == id);
-            if (user == null)
+            rwls.EnterReadLock();
+            try
             {
-                throw new InvalidOperationException();
+                var user = storage.SingleOrDefault(u => u.Id == id);
+                if (user == null)
+                {
+                    throw new InvalidOperationException();
+                }
             }
+            finally
+            {
+                rwls.ExitReadLock();
+            }
+            
             rwls.EnterWriteLock();
             try
             {
@@ -87,7 +96,16 @@ namespace Storage.Storages
 
         public IEnumerable<User> GetAll()
         {
-            return storage;
+            rwls.EnterReadLock();
+            try
+            {
+                return storage;
+            }
+            finally
+            {
+                rwls.ExitReadLock();
+            }
+
         }
 
         public void Save()
