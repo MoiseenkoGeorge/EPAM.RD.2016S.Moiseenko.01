@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
 using System.Xml.Serialization;
@@ -86,7 +87,7 @@ namespace Storage.Storages
             rwls.EnterReadLock();
             try
             {
-                return storage.Where(u => funcs.All(f => f(u))).Select(u => u.Id);
+                return storage.AsParallel().Where(u => funcs.All(f => f(u))).Select(u => u.Id);
             }
             finally
             {

@@ -66,30 +66,35 @@ namespace BLL.Services.Network
         private void InitReceive()
         {
             byte[] buffer = new byte[10240];
-            EndPoint remotEndPoint = broadcastIpEndPoint;
             try
             {
-                while (true)
-                {
-                    var bytesRead = socket.ReceiveFrom(buffer, ref remotEndPoint);
-                    using (var ms = new MemoryStream(buffer))
-                    {
-                        var packet = (Packet<User>)binaryFormatter.Deserialize(ms);
-                        if (packet.MessageType == MessageType.TypeAdded)
-                        {
-                            OnUserAdded(new UserEventArgs(packet.Entity));
-                        }
-                        else
-                        {
-                            OnUserDeleted(new UserEventArgs(packet.Entity));
-                        }
-                    }
-                }
+                    SocketAsyncEventArgs socketAsyncEventArgs = new SocketAsyncEventArgs();
+                socketAsyncEventArgs.RemoteEndPoint = broadcastIpEndPoint;
+                    socketAsyncEventArgs.SetBuffer(buffer,0,buffer.Length);
+                    socketAsyncEventArgs.Completed += ReceiveCompleted;
+                    var bytesRead = socket.ReceiveFromAsync(socketAsyncEventArgs);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return;
             }
+        }
+
+        private void ReceiveCompleted(object sender, SocketAsyncEventArgs e)
+        {
+            using (var ms = new MemoryStream(e.Buffer))
+            {
+                var packet = (Packet<User>)binaryFormatter.Deserialize(ms);
+                if (packet.MessageType == MessageType.TypeAdded)
+                {
+                    OnUserAdded(new UserEventArgs(packet.Entity));
+                }
+                else
+                {
+                    OnUserDeleted(new UserEventArgs(packet.Entity));
+                }
+            }
+            InitReceive();
         }
 
         private void OnUserAdded(UserEventArgs e)

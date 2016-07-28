@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using BLL.Interfacies;
 using BLL.Loggers.Interfacies;
 using Entities;
@@ -30,6 +32,7 @@ namespace BLL
                 logger.SendMessage(TraceEventType.Information, "try to add new user");
                 var result = userService.AddUser(user);
                 logger.SendMessage(TraceEventType.Information, $"addition of user is complete, his id - {result}");
+                logger.SendMessage(TraceEventType.Information, $"send user by network, his id - {result}");
                 return result;
             }
             catch (Exception e)
@@ -65,7 +68,8 @@ namespace BLL
 
         public override List<int> FindUsers(Func<User, bool>[] funcs)
         {
-            logger.SendMessage(TraceEventType.Information, "Find user by predicates");
+            
+            logger.SendMessage(TraceEventType.Information, $"Find user by predicates");
             rwls.EnterReadLock();
             try
             {

@@ -61,16 +61,17 @@ namespace BLL.Configurations.UserServiceConfigurations
 
         public Tuple<LoggibleUserService,LoggibleUserService[]> GetUserServices()
         {
-            if (countOfMasters != 1)
+            if (countOfMasters > 1)
                 throw new InvalidOperationException();
-
+            LoggibleUserService master = null;
             UserServiceElement[] userServiceElements = section.UserServiceItems.Cast<UserServiceElement>().ToArray();
-            var masterElement = userServiceElements.Single(s => s.IsMaster);
             var slaveElements = userServiceElements.Where(s => !s.IsMaster);
 
             LoggibleUserService[] slaveServices = new LoggibleUserService[countOfSlaves];
 
-            LoggibleUserService master = CreateUserService(userStorage, masterElement);
+            var masterElement = userServiceElements.SingleOrDefault(s => s.IsMaster);
+            if(masterElement != null)
+                master = CreateUserService(userStorage, masterElement);
             int i = 0;
             foreach (var config in slaveElements)
             {

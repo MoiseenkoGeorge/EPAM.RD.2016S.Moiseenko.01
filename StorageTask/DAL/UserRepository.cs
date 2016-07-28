@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using DAL.Interfacies;
 using Entities;
@@ -44,7 +45,7 @@ namespace DAL
             rwls.EnterReadLock();
             try
             {
-                user = localUserStorage.FirstOrDefault(u => u.Id == entity.Id);
+                user = localUserStorage.AsParallel().FirstOrDefault(u => u.Id == entity.Id);
             }
             finally
             {
@@ -69,7 +70,7 @@ namespace DAL
             rwls.EnterReadLock();
             try
             {
-                user = localUserStorage.FirstOrDefault(u => u.Id == entity.Id);
+                user = localUserStorage.AsParallel().FirstOrDefault(u => u.Id == entity.Id);
             }
             finally
             {
@@ -107,7 +108,7 @@ namespace DAL
 
         public List<int> GetUsersIdsByPredicate(Func<User, bool>[] funcs)
         {
-            return localUserStorage.Where(u => funcs.All(f => f(u))).Select(u => u.Id).ToList();
+            return localUserStorage.AsParallel().Where(u => funcs.All(f => f(u))).Select(u => u.Id).ToList();
         }
     }
 }

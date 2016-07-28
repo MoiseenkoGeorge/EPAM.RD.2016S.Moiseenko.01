@@ -24,7 +24,7 @@ namespace ConsoleTestApplication
             Gender = Gender.Male
         };
 
-        private User validUser2 = new User()
+        private static User validUser2 = new User()
         {
             FirstName = "Viktorya",
             LastName = "Ivanova",
@@ -40,20 +40,26 @@ namespace ConsoleTestApplication
             var userServices = configurator.GetUserServices();
             var master = userServices.Item1;
             var slaves = userServices.Item2;
-            Thread masterThread = new Thread(() =>
+            if (master != null)
             {
-                while (true)
+                Thread masterThread = new Thread(() =>
                 {
-                    int id = master.AddUser(validUser1);
-                    validUser1.Id = id;
-                    Console.WriteLine(
-                        $"Name of service : {master.Name}, Count of users : {master.FindUsers(new Func<User, bool>[] { u => true }).Count}");
-                    Thread.Sleep(2000);
-
-                    master.DeleteUser(validUser1);
-                }
-            });
-            masterThread.Start();
+                    while (true)
+                    {
+                        int id = master.AddUser(validUser1);
+                        validUser1.Id = id;
+                        Console.WriteLine(
+                            $"Name of service : {master.Name}, Count of users : {master.FindUsers(new Func<User, bool>[] {u => true}).Count}");
+                        Thread.Sleep(2000);
+                        master.AddUser(validUser2);
+                        Console.WriteLine(
+                            $"Name of service : {master.Name}, Count of users : {master.FindUsers(new Func<User, bool>[] {u => true}).Count}");
+                        Thread.Sleep(2000);
+                        master.DeleteUser(validUser1);
+                    }
+                });
+                masterThread.Start();
+            }
             foreach (var slave in slaves)
             {
                 Thread slaveThread = new Thread(() =>
@@ -62,7 +68,7 @@ namespace ConsoleTestApplication
                     {
                         Console.WriteLine(
                             $"Name of service : {slave.Name}, Count of users : {slave.FindUsers(new Func<User, bool>[] { u => true }).Count}");
-                        Thread.Sleep(1200);
+                        Thread.Sleep(1500);
                     }
                 });
                 slaveThread.Start();
