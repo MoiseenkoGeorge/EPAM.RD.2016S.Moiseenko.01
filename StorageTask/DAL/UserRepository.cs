@@ -50,13 +50,17 @@ namespace DAL
             {
                 rwls.ExitReadLock();
             }
+
             if (user == null)
             {
                 rwls.EnterWriteLock();
                 localUserStorage.Add(entity);
                 rwls.ExitWriteLock();
             }
-            else throw new InvalidOperationException("The same user is already exists");
+            else
+            {
+                throw new InvalidOperationException("The same user is already exists");
+            }
         }
 
         public void Detach(User entity)
@@ -71,8 +75,12 @@ namespace DAL
             {
                 rwls.ExitReadLock();
             }
+
             if (user == null)
+            {
                 throw new InvalidOperationException("user is not exists");
+            }
+
             rwls.EnterWriteLock();
             localUserStorage.Remove(entity);
             rwls.ExitWriteLock();

@@ -14,15 +14,15 @@ namespace BLL
 {
     public sealed class MasterUserService : UserService
     {
-        public override bool IsMaster => true;
-
         public MasterUserService(string name, IUserRepository userRepository, IUserTransmitter transmitter) : base(name)
         {
-            if(userRepository == null || transmitter == null)
+            if (userRepository == null || transmitter == null)
                 throw new ArgumentNullException();
             this.userRepository = userRepository;
             this.transmitter = transmitter;
         }
+
+        public override bool IsMaster => true;
 
         public override int AddUser(User user)
         {

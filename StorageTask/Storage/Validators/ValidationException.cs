@@ -6,11 +6,11 @@ namespace Storage.Validators
     [Serializable]
     public class ValidationException : Exception
     {
-        public IEnumerable<ValidationResult> ValidationResults { get; private set; }
-
         public ValidationException(IEnumerable<ValidationResult> validationResults)
         {
             ValidationResults = validationResults;
-        }  
+        }
+
+        public IEnumerable<ValidationResult> ValidationResults { get; private set; }
     }
 }

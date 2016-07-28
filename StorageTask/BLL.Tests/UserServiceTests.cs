@@ -45,8 +45,8 @@ namespace BLL.Tests
 
         [Test]
         public void UserService_CreateUserServicesFromAppconfig_ReturnAllGood()
-        { 
-            var configurator = new UserServiceConfigurator(userStorage,logger);
+        {
+            var configurator = new UserServiceConfigurator(userStorage, logger);
             var userServices = configurator.GetUserServices();
 
         }
@@ -55,22 +55,22 @@ namespace BLL.Tests
         [Test]
         public void UserService_CreateUserServicesWithTwoMasters_ReturnAnException()
         {
-            var userServiceConfigurator = new UserServiceConfigurator(userStorage,logger, 2, 2);
+            var userServiceConfigurator = new UserServiceConfigurator(userStorage, logger, 2, 2);
             Assert.Throws<InvalidOperationException>(() => userServiceConfigurator.GetUserServices());
         }
 
         [Test]
-        public void UserService_CreateTwoUserServicesFromAppConfig_ReturnThreeServices()
+        public void UserService_CreateThreeUserServicesFromAppConfig_ReturnThreeServices()
         {
             var configurator = new UserServiceConfigurator(userStorage, logger);
             var result = configurator.GetUserServices();
-            Assert.AreEqual(3, result.Length);
+            Assert.AreEqual(3, result.Item2.Length + 1);
         }
 
         [Test]
         public void UserService_AddUserThrowSlaveUserService_ThrowAnException()
         {
-            var configurator = new UserServiceConfigurator(userStorage,logger);
+            var configurator = new UserServiceConfigurator(userStorage, logger);
             var result = configurator.GetUserServices();
             Assert.Throws<InvalidOperationException>(() => result[1].AddUser(validUser));
         }
@@ -78,20 +78,20 @@ namespace BLL.Tests
         [Test]
         public void UserService_AddUserThrowMasterUserService_SlaveUserServiceAttachUser()
         {
-            var configurator = new UserServiceConfigurator(userStorage,logger);
+            var configurator = new UserServiceConfigurator(userStorage, logger);
             var result = configurator.GetUserServices();
-            result[0].AddUser(validUser);
-            Assert.AreEqual(0,result[1].FindUsers(new Func<User, bool>[] {u => u.FirstName == validUser.FirstName}).ToArray()[0]);
+            result.Item1.AddUser(validUser);
+            Assert.AreEqual(0, result.Item2[0].FindUsers(new Func<User, bool>[] { u => u.FirstName == validUser.FirstName }).ToArray()[0]);
         }
 
         [Test]
         public void UserService_DeleteUserThrowMasterUserService_SlaveUserDetachUser()
         {
-            var configurator = new UserServiceConfigurator(userStorage,logger);
+            var configurator = new UserServiceConfigurator(userStorage, logger);
             var result = configurator.GetUserServices();
-            result[0].AddUser(validUser);
-            result[0].DeleteUser(validUser);
-            Assert.AreEqual(0,result[1].FindUsers(new Func<User, bool>[] { u => u.FirstName == validUser.FirstName }).Count); 
+            result.Item1.AddUser(validUser);
+            result.Item1.DeleteUser(validUser);
+            Assert.AreEqual(0, result.Item2[1].FindUsers(new Func<User, bool>[] { u => u.FirstName == validUser.FirstName }).Count);
         }
     }
 }

@@ -5,11 +5,6 @@ namespace Entities
     [Serializable]
     public struct VisaRecord
     {
-        public string Country { get; set; }
-
-        public DateTime From { get; set; }
-
-        public DateTime Until { get;  set; }
         /// <param name="country"> Name of country</param>
         /// <param name="from"> The start time of visa</param>
         /// <param name="until"> The end time of visa</param>
@@ -19,5 +14,11 @@ namespace Entities
             From = from;
             Until = until;
         }
+
+        public string Country { get; set; }
+
+        public DateTime From { get; set; }
+
+        public DateTime Until { get;  set; }
     }
 }

@@ -9,10 +9,8 @@ namespace BLL.Loggers.Interfacies
 {
     public interface ILogger
     {
-
         bool IsActivated { get; }
 
         void SendMessage(TraceEventType type, string message);
     }
-
 }

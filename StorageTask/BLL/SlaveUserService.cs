@@ -11,8 +11,6 @@ namespace BLL
 {
     public sealed class SlaveUserService : UserService
     {
-        public override bool IsMaster => false;
-
         public SlaveUserService(string name, IUserRepository userRepository, IUserTransmitter transmitter) : base(name)
         {
             if (userRepository == null || transmitter == null)
@@ -22,6 +20,8 @@ namespace BLL
             transmitter.UserAdded += AttachUser;
             transmitter.UserDeleted += DetachUser;
         }
+
+        public override bool IsMaster => false;
 
         public override int AddUser(User user)
         {

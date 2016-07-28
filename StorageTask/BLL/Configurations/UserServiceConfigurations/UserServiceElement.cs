@@ -2,7 +2,7 @@
 
 namespace BLL.Configurations.UserServiceConfigurations
 {
-    class UserServiceElement : ConfigurationElement
+    internal class UserServiceElement : ConfigurationElement
     {
         [ConfigurationProperty("name", DefaultValue = "", IsKey = true, IsRequired = true)]
         public string Name
@@ -18,17 +18,17 @@ namespace BLL.Configurations.UserServiceConfigurations
             set { base["isMaster"] = value; }
         }
 
-        [ConfigurationProperty("appDomainName",IsKey = false, IsRequired = true)]
+        [ConfigurationProperty("appDomainName", IsKey = false, IsRequired = true)]
         public string AppDomainName
         {
-            get { return ((string) (base["appDomainName"])); }
+            get { return ((string)(base["appDomainName"])); }
             set { base["appDomainName"] = value; }
         }
 
         [ConfigurationProperty("transmitterName", IsKey = false, IsRequired = true)]
         public string TransmitterName
         {
-            get { return ((string) (base["transmitterName"])); }
+            get { return ((string)(base["transmitterName"])); }
             set { base["transmitterNames"] = value; }
         }
     }

@@ -9,14 +9,14 @@ namespace Storage.Validators
 
         private readonly string errorMessage;
 
-        public string PropertyName => propertyName;
-
-        public string ErrorMessage => errorMessage;
-
         public ValidationError(string propertyName, string errorMessage)
         {
             this.propertyName = propertyName;
             this.errorMessage = errorMessage;
         }
+
+        public string PropertyName => this.propertyName;
+
+        public string ErrorMessage => this.errorMessage;
     }
 }

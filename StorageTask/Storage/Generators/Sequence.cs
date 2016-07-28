@@ -8,13 +8,17 @@ namespace Storage.Generators
     {
         private int current;
 
+        public int Current => this.current;
+
+        object IEnumerator.Current => this.Current;
+
         public void SetCurrent(int id)
         {
-            current = id;
+            this.current = id;
         }
+
         public void Dispose()
         {
-
         }
 
         public bool MoveNext()
@@ -23,7 +27,7 @@ namespace Storage.Generators
             {
                 checked
                 {
-                    current += 2;
+                    this.current += 2;
                 }
             }
             catch (OverflowException)
@@ -37,11 +41,7 @@ namespace Storage.Generators
 
         public void Reset()
         {
-            current = 0;
+            this.current = 0;
         }
-
-        public int Current => current;
-
-        object IEnumerator.Current => Current;
     }
 }

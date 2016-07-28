@@ -3,7 +3,7 @@
 namespace BLL.Configurations.UserServiceConfigurations
 {
     [ConfigurationCollection(typeof(UserServiceElement), AddItemName = "Service")]
-    class UserServicesCollection : ConfigurationElementCollection
+    internal class UserServicesCollection : ConfigurationElementCollection
     {
         protected override ConfigurationElement CreateNewElement()
         {

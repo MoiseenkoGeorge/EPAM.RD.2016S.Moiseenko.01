@@ -10,6 +10,10 @@ namespace Entities
     [Serializable]
     public class User : IEntity
     {
+        public User()
+        {
+        }
+
         public int Id { get; set; }
 
         public string FirstName { get; set; }
@@ -36,11 +40,6 @@ namespace Entities
 
             User user = (User)obj;
             return user.FirstName == FirstName && user.LastName == LastName;
-        }
-
-        public User()
-        {
-            
         }
     }
 }

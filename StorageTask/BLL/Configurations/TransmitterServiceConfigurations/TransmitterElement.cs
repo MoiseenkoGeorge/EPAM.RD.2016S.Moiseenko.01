@@ -10,6 +10,7 @@ namespace BLL.Configurations.TransmitterServiceConfigurations
             get { return (string)base["name"]; }
             set { base["name"] = value; }
         }
+
         [ConfigurationProperty("value", IsKey = false, IsRequired = true)]
         public string Value
         {

@@ -2,7 +2,7 @@
 
 namespace BLL.Configurations.UserServiceConfigurations
 {
-    class UserServiceConfigSection : ConfigurationSection
+    internal class UserServiceConfigSection : ConfigurationSection
     {
         [ConfigurationProperty("Services")]
         public UserServicesCollection UserServiceItems => ((UserServicesCollection)(base["Services"]));

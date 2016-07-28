@@ -24,7 +24,7 @@ namespace ConsoleTestApplication
             Gender = Gender.Male
         };
 
-        private static User validUser2 = new User()
+        private User validUser2 = new User()
         {
             FirstName = "Viktorya",
             LastName = "Ivanova",
@@ -36,36 +36,36 @@ namespace ConsoleTestApplication
         {
             var userStorage = new UserMemoryStorage(new Generator(), new Validator(), ConfigurationManager.AppSettings["FileName"]);
             var logger = new Logger();
-            var configurator = new UserServiceConfigurator(userStorage,logger);
+            var configurator = new UserServiceConfigurator(userStorage, logger);
             var userServices = configurator.GetUserServices();
-            for (int i = 0; i < 3; i++)
+            var master = userServices.Item1;
+            var slaves = userServices.Item2;
+            Thread masterThread = new Thread(() =>
             {
-                Thread masterThread = new Thread(() =>
+                while (true)
+                {
+                    int id = master.AddUser(validUser1);
+                    validUser1.Id = id;
+                    Console.WriteLine(
+                        $"Name of service : {master.Name}, Count of users : {master.FindUsers(new Func<User, bool>[] { u => true }).Count}");
+                    Thread.Sleep(2000);
+
+                    master.DeleteUser(validUser1);
+                }
+            });
+            masterThread.Start();
+            foreach (var slave in slaves)
+            {
+                Thread slaveThread = new Thread(() =>
                 {
                     while (true)
                     {
-                        int id = userServices[0].AddUser(validUser1);
-                        validUser1.Id = id;
                         Console.WriteLine(
-                            $"Name of service : {userServices[0].Name}, Count of users : {userServices[0].FindUsers(new Func<User, bool>[] {u => true}).Count}");
-                        Thread.Sleep(1000);
-                        userServices[0].DeleteUser(validUser1);
+                            $"Name of service : {slave.Name}, Count of users : {slave.FindUsers(new Func<User, bool>[] { u => true }).Count}");
+                        Thread.Sleep(1200);
                     }
                 });
-                masterThread.Start();
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                Thread slave1Thread = new Thread(() =>
-                {
-                    while (true)
-                    {
-                        Console.WriteLine(
-                           $"Name of service : {userServices[1].Name}, Count of users : {userServices[1].FindUsers(new Func<User, bool>[] { u => true }).Count}");
-                        Thread.Sleep(500);
-                    }
-                });
-                slave1Thread.Start();
+                slaveThread.Start();
             }
         }
     }

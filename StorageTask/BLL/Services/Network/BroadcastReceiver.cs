@@ -19,12 +19,6 @@ namespace BLL.Services.Network
 
         private readonly object locker = new object();
 
-        public bool IsActivate { get; private set; }
-
-        public event EventHandler<UserEventArgs> UserAdded = delegate { };
-
-        public event EventHandler<UserEventArgs> UserDeleted = delegate { }; 
-
         public BroadcastReceiver(int port)
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -34,6 +28,12 @@ namespace BLL.Services.Network
             binaryFormatter = new BinaryFormatter();
             ReceiveData();
         }
+
+        public event EventHandler<UserEventArgs> UserAdded = delegate { };
+
+        public event EventHandler<UserEventArgs> UserDeleted = delegate { };
+
+        public bool IsActivate { get; private set; }
 
         public void SendData(MessageType messageType, User entity)
         {
@@ -77,16 +77,16 @@ namespace BLL.Services.Network
                         var packet = (Packet<User>)binaryFormatter.Deserialize(ms);
                         if (packet.MessageType == MessageType.TypeAdded)
                         {
-                            OnUserAdded(new UserEventArgs(packet.entity));
+                            OnUserAdded(new UserEventArgs(packet.Entity));
                         }
                         else
                         {
-                            OnUserDeleted(new UserEventArgs(packet.entity));
+                            OnUserDeleted(new UserEventArgs(packet.Entity));
                         }
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return;
             }
@@ -105,14 +105,13 @@ namespace BLL.Services.Network
         }
     }
 
-
     public class UserEventArgs : EventArgs
     {
-        public User User { get; }
-
         public UserEventArgs(User user)
         {
             User = user;
         }
+
+        public User User { get; }
     }
 }

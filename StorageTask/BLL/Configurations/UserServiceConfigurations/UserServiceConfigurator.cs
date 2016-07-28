@@ -59,7 +59,7 @@ namespace BLL.Configurations.UserServiceConfigurations
             this.countOfSlaves = countOfSlaves;
         }
 
-        public LoggibleUserService[] GetUserServices()
+        public Tuple<LoggibleUserService,LoggibleUserService[]> GetUserServices()
         {
             if (countOfMasters != 1)
                 throw new InvalidOperationException();
@@ -68,14 +68,16 @@ namespace BLL.Configurations.UserServiceConfigurations
             var masterElement = userServiceElements.Single(s => s.IsMaster);
             var slaveElements = userServiceElements.Where(s => !s.IsMaster);
 
-            LoggibleUserService[] services = new LoggibleUserService[countOfMasters + countOfSlaves];
-            services[0] = CreateUserService(userStorage, masterElement);
-            int i = 1;
+            LoggibleUserService[] slaveServices = new LoggibleUserService[countOfSlaves];
+
+            LoggibleUserService master = CreateUserService(userStorage, masterElement);
+            int i = 0;
             foreach (var config in slaveElements)
             {
-                services[i++] = CreateUserService(userStorage, config);
+                slaveServices[i++] = CreateUserService(userStorage, config);
             }
-            return services;
+
+            return new Tuple<LoggibleUserService, LoggibleUserService[]>(master, slaveServices);
         }
 
         private LoggibleUserService CreateUserService(IUserStorage userStorage, UserServiceElement serviceConfig)
@@ -85,18 +87,18 @@ namespace BLL.Configurations.UserServiceConfigurations
                 ApplicationBase = AppDomain.CurrentDomain.BaseDirectory,
                 PrivateBinPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MyDomain")
             };
-            AppDomain domain = AppDomain.CreateDomain(serviceConfig.AppDomainName + serviceConfig.Name,null,appDomainSetup);
+            AppDomain domain = AppDomain.CreateDomain(serviceConfig.AppDomainName + serviceConfig.Name, null, appDomainSetup);
             domain.Load("BLL");
 
             UserRepository userRepository = (UserRepository)domain.CreateInstanceAndUnwrap("DAL", "DAL.UserRepository",
                 false, BindingFlags.CreateInstance | BindingFlags.Public | BindingFlags.Instance,
                 null, new object[] { userStorage }, null, null);
 
-            IUserTransmitter userTransmitter = tsc.GetTransmitter(serviceConfig.TransmitterName,domain);
+            IUserTransmitter userTransmitter = tsc.GetTransmitter(serviceConfig.TransmitterName, domain);
 
             var typeName = serviceConfig.IsMaster ? "BLL.MasterUserService" : "BLL.SlaveUserService";
 
-            UserService userService = (UserService)domain.CreateInstanceAndUnwrap("BLL",typeName, false, BindingFlags.CreateInstance | BindingFlags.Public | BindingFlags.Instance,
+            UserService userService = (UserService)domain.CreateInstanceAndUnwrap("BLL", typeName, false, BindingFlags.CreateInstance | BindingFlags.Public | BindingFlags.Instance,
                 null, new object[] { serviceConfig.Name, userRepository, userTransmitter }, null, null);
 
             return new LoggibleUserService(logger, userService);

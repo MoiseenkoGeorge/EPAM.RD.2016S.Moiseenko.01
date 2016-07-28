@@ -10,17 +10,17 @@ namespace BLL
 {
     public class LoggibleUserService : UserService
     {
-        private ILogger logger;
-
         private readonly UserService userService;
 
-        public override bool IsMaster => userService.IsMaster;
+        private ILogger logger;
 
         public LoggibleUserService(ILogger logger, UserService userService) : base(userService.Name)
         {
             this.logger = logger;
             this.userService = userService;
         }
+
+        public override bool IsMaster => userService.IsMaster;
 
         public override int AddUser(User user)
         {

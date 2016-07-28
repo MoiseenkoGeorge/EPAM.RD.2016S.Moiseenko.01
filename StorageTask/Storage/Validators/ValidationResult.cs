@@ -9,13 +9,13 @@ namespace Storage.Validators
     {
         private readonly List<ValidationError> validationErrors;
 
-        public ICollection<ValidationError> ValidationErrors => validationErrors;
-
-        public bool IsValid => validationErrors.Count == 0;
-
         public ValidationResult(IEnumerable<ValidationError> validationErrors)
         {
             this.validationErrors = validationErrors?.ToList() ?? new List<ValidationError>();
         }
+
+        public ICollection<ValidationError> ValidationErrors => validationErrors;
+
+        public bool IsValid => validationErrors.Count == 0;
     }
 }

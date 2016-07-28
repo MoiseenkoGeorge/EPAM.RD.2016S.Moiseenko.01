@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Configuration;
-using BLL.Loggers.Interfacies;
 using System.Diagnostics;
+using BLL.Loggers.Interfacies;
 
 namespace BLL.Loggers
 {
     public class Logger : MarshalByRefObject, ILogger
     {
         private readonly TraceSource traceSource;
-        public bool IsActivated { get; }
 
         public Logger(string traceSourceName)
         {
@@ -18,7 +17,6 @@ namespace BLL.Loggers
 
         public Logger() : this(ConfigurationManager.AppSettings["TraceSourceName"])
         {
-            
         }
 
         public Logger(bool isActivated)
@@ -26,11 +24,12 @@ namespace BLL.Loggers
             IsActivated = isActivated;
         }
 
+        public bool IsActivated { get; }
+
         public void SendMessage(TraceEventType type, string message)
         {
-            if(IsActivated)
+            if (IsActivated)
                 traceSource.TraceEvent(type, 1, message);
         }
-
     }
 }

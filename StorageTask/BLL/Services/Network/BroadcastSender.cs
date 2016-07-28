@@ -9,29 +9,46 @@ using Entities;
 
 namespace BLL.Services.Network
 {
+    [Serializable]
+    public struct Packet<T>
+    {
+        public MessageType MessageType;
+
+        public T Entity;
+
+        public Packet(MessageType type, T entity)
+        {
+            MessageType = type;
+            this.Entity = entity;
+        }
+    }
+
     public class BroadcastSender : MarshalByRefObject, IDisposable, IUserTransmitter
     {
         private readonly Socket socket;
+
         private readonly IPEndPoint ipEndPoint;
+
         private readonly BinaryFormatter bf;
 
-        public event EventHandler<UserEventArgs> UserAdded
+        public BroadcastSender(int port)
         {
-            add { throw new InvalidOperationException(); }
-            remove { throw new InvalidOperationException();}
+            socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
+            ipEndPoint = new IPEndPoint(IPAddress.Broadcast, port);
+            bf = new BinaryFormatter();
         }
-        public event EventHandler<UserEventArgs> UserDeleted
+
+        public event EventHandler<UserEventArgs> UserAdded
         {
             add { throw new InvalidOperationException(); }
             remove { throw new InvalidOperationException(); }
         }
 
-        public BroadcastSender(int port)
+        public event EventHandler<UserEventArgs> UserDeleted
         {
-            socket = new Socket(AddressFamily.InterNetwork,SocketType.Dgram, ProtocolType.Udp);
-            socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
-            ipEndPoint = new IPEndPoint(IPAddress.Broadcast, port);
-            bf = new BinaryFormatter();
+            add { throw new InvalidOperationException(); }
+            remove { throw new InvalidOperationException(); }
         }
 
         public void SendData(MessageType type, User entity)
@@ -59,21 +76,6 @@ namespace BLL.Services.Network
         {
             socket.Shutdown(SocketShutdown.Both);
             socket.Dispose();
-        }
-
-    }
-
-
-    [Serializable]
-    public struct Packet<T>
-    {
-        public MessageType MessageType;
-        public T entity;
-
-        public Packet(MessageType type, T entity)
-        {
-            MessageType = type;
-            this.entity = entity;
         }
     }
 }

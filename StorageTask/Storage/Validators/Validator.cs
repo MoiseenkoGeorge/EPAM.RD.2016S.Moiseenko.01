@@ -9,7 +9,7 @@ namespace Storage.Validators
     {
         public ValidationResult Validate(User entity)
         {
-            if(entity == null)
+            if (entity == null)
                 throw new ArgumentNullException();
 
             List<ValidationError> validationErrors = new List<ValidationError>();
@@ -17,14 +17,14 @@ namespace Storage.Validators
             ValidateFirstName(entity.FirstName, nameof(entity.FirstName), validationErrors);
             ValidateLastName(entity.LastName, nameof(entity.LastName), validationErrors);
             ValidateGender(entity.Gender, nameof(entity.Gender), validationErrors);
-            ValidateBirthday(entity.Birthday,nameof(entity.Birthday),validationErrors);
+            ValidateBirthday(entity.Birthday, nameof(entity.Birthday), validationErrors);
 
             return new ValidationResult(validationErrors);
         }
 
         private void ValidateFirstName(string firstName, string paramName, ICollection<ValidationError> validationErrors)
         {
-            if(string.IsNullOrWhiteSpace(firstName))
+            if (string.IsNullOrWhiteSpace(firstName))
                 validationErrors.Add(new ValidationError(paramName, "FirstName is required"));
         }
 
@@ -42,9 +42,8 @@ namespace Storage.Validators
 
         private void ValidateBirthday(DateTime birthday, string paramName, ICollection<ValidationError> validationErrors)
         {
-            if(birthday == default(DateTime))
-                validationErrors.Add(new ValidationError(paramName,"Birthday is required"));
+            if (birthday == default(DateTime))
+                validationErrors.Add(new ValidationError(paramName, "Birthday is required"));
         }
-
     }
 }
