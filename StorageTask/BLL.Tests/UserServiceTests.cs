@@ -72,7 +72,7 @@ namespace BLL.Tests
         {
             var configurator = new UserServiceConfigurator(userStorage, logger);
             var result = configurator.GetUserServices();
-            Assert.Throws<InvalidOperationException>(() => result[1].AddUser(validUser));
+            Assert.Throws<InvalidOperationException>(() => result.Item1.AddUser(validUser));
         }
 
         [Test]

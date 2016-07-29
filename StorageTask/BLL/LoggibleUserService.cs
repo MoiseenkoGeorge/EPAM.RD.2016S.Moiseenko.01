@@ -4,12 +4,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.ServiceModel;
 using BLL.Interfacies;
 using BLL.Loggers.Interfacies;
 using Entities;
 
 namespace BLL
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class LoggibleUserService : UserService
     {
         private readonly UserService userService;

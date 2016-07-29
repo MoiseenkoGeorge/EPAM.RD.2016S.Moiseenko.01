@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ServiceModel;
 using System.Threading;
 using BLL.Services.Network.Interfacies;
 using DAL.Interfacies;
@@ -7,7 +8,7 @@ using Entities;
 
 namespace BLL.Interfacies
 {
-    public abstract class UserService : MarshalByRefObject, IService
+    public abstract class UserService : MarshalByRefObject, IUserService
     {
         protected readonly string name;
 

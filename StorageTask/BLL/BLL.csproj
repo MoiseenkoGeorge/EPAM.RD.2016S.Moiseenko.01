@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +50,7 @@
     <Compile Include="Configurations\UserServiceConfigurations\UserServiceConfigurator.cs" />
     <Compile Include="Configurations\UserServiceConfigurations\UserServiceElement.cs" />
     <Compile Include="Configurations\UserServiceConfigurations\UserServicesCollection.cs" />
+    <Compile Include="Interfacies\IUserService.cs" />
     <Compile Include="Loggers\Interfacies\ILogger.cs" />
     <Compile Include="Loggers\Logger.cs" />
     <Compile Include="LoggibleUserService.cs" />
