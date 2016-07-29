@@ -68,9 +68,11 @@ namespace BLL.Services.Network
             byte[] buffer = new byte[10240];
             try
             {
-                    SocketAsyncEventArgs socketAsyncEventArgs = new SocketAsyncEventArgs();
-                socketAsyncEventArgs.RemoteEndPoint = broadcastIpEndPoint;
-                    socketAsyncEventArgs.SetBuffer(buffer,0,buffer.Length);
+                SocketAsyncEventArgs socketAsyncEventArgs = new SocketAsyncEventArgs
+                {
+                    RemoteEndPoint = broadcastIpEndPoint
+                };
+                socketAsyncEventArgs.SetBuffer(buffer,0,buffer.Length);
                     socketAsyncEventArgs.Completed += ReceiveCompleted;
                     var bytesRead = socket.ReceiveFromAsync(socketAsyncEventArgs);
             }

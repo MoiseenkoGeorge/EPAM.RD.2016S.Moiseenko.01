@@ -27,7 +27,7 @@ namespace BLL.Services.Network
     {
         private readonly Socket socket;
 
-        private readonly IPEndPoint ipEndPoint;
+        private readonly IPEndPoint broadcastIpEndPoint;
 
         private readonly BinaryFormatter bf;
 
@@ -35,7 +35,7 @@ namespace BLL.Services.Network
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
-            ipEndPoint = new IPEndPoint(IPAddress.Broadcast, port);
+            broadcastIpEndPoint = new IPEndPoint(IPAddress.Broadcast, port);
             bf = new BinaryFormatter();
         }
 
@@ -58,7 +58,12 @@ namespace BLL.Services.Network
                 using (var ms = new MemoryStream())
                 {
                     bf.Serialize(ms, new Packet<User>(type, entity));
-                    socket.SendTo(ms.ToArray(), ipEndPoint);
+                    SocketAsyncEventArgs socketAsyncEventArgs = new SocketAsyncEventArgs
+                    {
+                        RemoteEndPoint = broadcastIpEndPoint
+                    };
+                    socketAsyncEventArgs.SetBuffer(ms.ToArray(), 0, ms.ToArray().Length);
+                    socket.SendToAsync(socketAsyncEventArgs);
                 }
             }
             catch (Exception)
