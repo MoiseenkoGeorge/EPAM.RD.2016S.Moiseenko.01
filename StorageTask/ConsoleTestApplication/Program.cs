@@ -8,6 +8,8 @@ using BLL;
 using BLL.Configurations.UserServiceConfigurations;
 using BLL.Loggers;
 using Entities;
+using Storage.Criterias;
+using Storage.Criterias.Interfacies;
 using Storage.Generators;
 using Storage.Storages;
 using Storage.Validators;
@@ -49,11 +51,11 @@ namespace ConsoleTestApplication
                         int id = master.AddUser(validUser1);
                         validUser1.Id = id;
                         Console.WriteLine(
-                            $"Name of service : {master.Name}, Count of users : {master.FindUsers(new Func<User, bool>[] {u => true}).Count}");
+                            $"Name of service : {master.Name}, Count of users : {master.FindUsers(new IUserCriteria[] {new TrueCriteria()}).Count}");
                         Thread.Sleep(2000);
                         master.AddUser(validUser2);
                         Console.WriteLine(
-                            $"Name of service : {master.Name}, Count of users : {master.FindUsers(new Func<User, bool>[] {u => true}).Count}");
+                            $"Name of service : {master.Name}, Count of users : {master.FindUsers(new IUserCriteria[] { new TrueCriteria()}).Count}");
                         Thread.Sleep(2000);
                         master.DeleteUser(validUser1);
                     }
@@ -67,7 +69,7 @@ namespace ConsoleTestApplication
                     while (true)
                     {
                         Console.WriteLine(
-                            $"Name of service : {slave.Name}, Count of users : {slave.FindUsers(new Func<User, bool>[] { u => true }).Count}");
+                            $"Name of service : {slave.Name}, Count of users : {slave.FindUsers(new IUserCriteria[] { new TrueCriteria()}).Count}");
                         Thread.Sleep(1500);
                     }
                 });

@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Threading;
 using System.Xml.Serialization;
 using Entities;
+using Storage.Criterias.Interfacies;
 using Storage.Generators.Interfacies;
 using Storage.Storages.Interfacies;
 using Storage.Validators;
@@ -30,6 +31,8 @@ namespace Storage.Storages
 
         public UserMemoryStorage(IGenerator<int> idGenerator, IUserValidator userValidator, string fileName)
         {
+            if(idGenerator == null || userValidator == null)
+                throw new NullReferenceException();
             filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), fileName);
             this.idGenerator = idGenerator;
             this.userValidator = userValidator;
@@ -82,12 +85,12 @@ namespace Storage.Storages
             }
         }
 
-        public IEnumerable<int> Search(Func<User, bool>[] funcs)
+        public IEnumerable<int> Search(IUserCriteria[] funcs)
         {
             rwls.EnterReadLock();
             try
             {
-                return storage.AsParallel().Where(u => funcs.All(f => f(u))).Select(u => u.Id);
+                return storage.AsParallel().Where(u => funcs.All(c => c.MeetCriteria(u))).Select(u => u.Id);
             }
             finally
             {

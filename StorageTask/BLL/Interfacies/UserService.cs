@@ -5,6 +5,7 @@ using System.Threading;
 using BLL.Services.Network.Interfacies;
 using DAL.Interfacies;
 using Entities;
+using Storage.Criterias.Interfacies;
 
 namespace BLL.Interfacies
 {
@@ -32,7 +33,7 @@ namespace BLL.Interfacies
 
         public abstract void DeleteUser(User user);
 
-        public virtual List<int> FindUsers(Func<User, bool>[] funcs)
+        public virtual List<int> FindUsers(IUserCriteria[] funcs)
         {
             return userRepository.GetUsersIdsByPredicate(funcs);
         }

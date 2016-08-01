@@ -34,6 +34,8 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,6 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Criterias\BirthdayCriteria.cs" />
+    <Compile Include="Criterias\FirstNameCriteria.cs" />
+    <Compile Include="Criterias\GenderCriteria.cs" />
+    <Compile Include="Criterias\IdCriteria.cs" />
+    <Compile Include="Criterias\Interfacies\ICriteria.cs" />
+    <Compile Include="Criterias\Interfacies\IUserCriteria.cs" />
+    <Compile Include="Criterias\TrueCriteria.cs" />
     <Compile Include="Generators\Generator.cs" />
     <Compile Include="Generators\Interfacies\IGenerator.cs" />
     <Compile Include="Generators\Sequence.cs" />

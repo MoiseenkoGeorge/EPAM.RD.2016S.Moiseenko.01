@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Entities;
 using Entities.Interfacies;
+using Storage.Criterias.Interfacies;
 
 namespace Storage.Storages.Interfacies
 {
@@ -13,7 +14,7 @@ namespace Storage.Storages.Interfacies
         /// <param name="id"> User's Id</param>
         void Delete(int id);
 
-        IEnumerable<int> Search(Func<TEntity, bool>[] funcs);
+        IEnumerable<int> Search(IUserCriteria[] funcs);
 
         IEnumerable<User> GetAll(); 
 

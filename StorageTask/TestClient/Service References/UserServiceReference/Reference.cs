@@ -219,9 +219,73 @@ namespace TestClient.UserServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TrueCriteria", Namespace="http://schemas.datacontract.org/2004/07/Storage.Criterias")]
+    [System.SerializableAttribute()]
+    public partial class TrueCriteria : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BirthdayCriteria", Namespace="http://schemas.datacontract.org/2004/07/Storage.Criterias")]
+    [System.SerializableAttribute()]
+    public partial class BirthdayCriteria : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UserServiceReference.IUserService")]
     public interface IUserService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/get_IsMaster", ReplyAction="http://tempuri.org/IUserService/get_IsMasterResponse")]
+        bool get_IsMaster();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/get_IsMaster", ReplyAction="http://tempuri.org/IUserService/get_IsMasterResponse")]
+        System.Threading.Tasks.Task<bool> get_IsMasterAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddUser", ReplyAction="http://tempuri.org/IUserService/AddUserResponse")]
         int AddUser(TestClient.UserServiceReference.User user);
@@ -236,10 +300,18 @@ namespace TestClient.UserServiceReference {
         System.Threading.Tasks.Task DeleteUserAsync(TestClient.UserServiceReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUsers", ReplyAction="http://tempuri.org/IUserService/FindUsersResponse")]
-        int[] FindUsers(System.Func<TestClient.UserServiceReference.User, bool>[] funcs);
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TestClient.UserServiceReference.TrueCriteria))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TestClient.UserServiceReference.BirthdayCriteria))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(int[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TestClient.UserServiceReference.User))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TestClient.UserServiceReference.Gender))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TestClient.UserServiceReference.VisaRecord[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TestClient.UserServiceReference.VisaRecord))]
+        int[] FindUsers(object[] funcs);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/FindUsers", ReplyAction="http://tempuri.org/IUserService/FindUsersResponse")]
-        System.Threading.Tasks.Task<int[]> FindUsersAsync(System.Func<TestClient.UserServiceReference.User, bool>[] funcs);
+        System.Threading.Tasks.Task<int[]> FindUsersAsync(object[] funcs);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -269,6 +341,14 @@ namespace TestClient.UserServiceReference {
                 base(binding, remoteAddress) {
         }
         
+        public bool get_IsMaster() {
+            return base.Channel.get_IsMaster();
+        }
+        
+        public System.Threading.Tasks.Task<bool> get_IsMasterAsync() {
+            return base.Channel.get_IsMasterAsync();
+        }
+        
         public int AddUser(TestClient.UserServiceReference.User user) {
             return base.Channel.AddUser(user);
         }
@@ -285,11 +365,11 @@ namespace TestClient.UserServiceReference {
             return base.Channel.DeleteUserAsync(user);
         }
         
-        public int[] FindUsers(System.Func<TestClient.UserServiceReference.User, bool>[] funcs) {
+        public int[] FindUsers(object[] funcs) {
             return base.Channel.FindUsers(funcs);
         }
         
-        public System.Threading.Tasks.Task<int[]> FindUsersAsync(System.Func<TestClient.UserServiceReference.User, bool>[] funcs) {
+        public System.Threading.Tasks.Task<int[]> FindUsersAsync(object[] funcs) {
             return base.Channel.FindUsersAsync(funcs);
         }
     }

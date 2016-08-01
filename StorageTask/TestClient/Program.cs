@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TestClient.UserServiceReference;
+
+
 namespace TestClient
 {
     class Program
@@ -19,7 +22,12 @@ namespace TestClient
         static void Main(string[] args)
         {
             UserServiceClient client = new UserServiceClient();
-            client.AddUser(validUser1);
+            while (true)
+            {
+                if(client.get_IsMaster()) client.AddUser(validUser1);
+                Thread.Sleep(1000);
+                client.FindUsers(new object[] { new TrueCriteria() });
+            }
             Console.ReadKey();
         }
     }

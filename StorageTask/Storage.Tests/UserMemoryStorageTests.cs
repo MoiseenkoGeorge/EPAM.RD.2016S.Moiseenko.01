@@ -7,6 +7,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Entities;
+using Storage.Criterias;
+using Storage.Criterias.Interfacies;
 using Storage.Generators;
 using Storage.Storages;
 using Storage.Storages.Interfacies;
@@ -77,7 +79,7 @@ namespace Storage.Tests
         [Test]
         public void Search_SearchById_returnOneId()
         {
-            var result = userStorage.Search(new Func<User, bool>[] { u => u.Id == 0 });
+            var result = userStorage.Search(new IUserCriteria[] { new IdCriteria() });
             Assert.AreEqual(result.Count(), 1);
         }
 
@@ -85,8 +87,7 @@ namespace Storage.Tests
         public void Search_searchUsersWithFirstNameIvanAndBirthdayToday_returnIds()
         {
             var result =
-                userStorage.Search(new Func<User, bool>[]
-                {u => u.FirstName == "Ivan", u => u.Birthday == DateTime.Today});
+                userStorage.Search(new IUserCriteria[] {new BirthdayCriteria(), new FirstNameCriteria(), });
             Assert.AreEqual(result.Count(), 1);
         }
         #endregion
@@ -96,12 +97,12 @@ namespace Storage.Tests
         [Test]
         public void Save_SaveCurrentStateOfStorage_ReturnTrue()
         {
-            var currentStorage = userStorage.Search(new Func<User, bool>[] { u => true });
+            var currentStorage = userStorage.Search(new IUserCriteria[] {new TrueCriteria() });
 
             userStorage.Save();
             userStorage.Load();
 
-            var result = userStorage.Search(new Func<User, bool>[] { u => true });
+            var result = userStorage.Search(new IUserCriteria[] { new TrueCriteria() });
             Assert.AreEqual(currentStorage.Count(), result.Count());
         }
         #endregion

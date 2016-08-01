@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Entities;
+using Storage.Criterias.Interfacies;
 
 namespace DAL.Interfacies
 {
     public interface IUserRepository : IRepository<User>
     {
-        List<int> GetUsersIdsByPredicate(Func<User, bool>[] func);
+        List<int> GetUsersIdsByPredicate(IUserCriteria[] func);
     }
 }

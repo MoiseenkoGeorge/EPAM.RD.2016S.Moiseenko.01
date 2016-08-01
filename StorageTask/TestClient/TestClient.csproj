@@ -58,22 +58,22 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UserServiceReference\item.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UserServiceReference\item1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UserServiceReference\item2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UserServiceReference\item3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UserServiceReference\item4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\UserServiceReference\LoggibleUserService.wsdl" />
+    <None Include="Service References\UserServiceReference\master1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UserServiceReference\master11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UserServiceReference\master12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UserServiceReference\master13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UserServiceReference\master14.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -82,7 +82,7 @@
     <WCFMetadataStorage Include="Service References\UserServiceReference\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UserServiceReference\item.disco" />
+    <None Include="Service References\UserServiceReference\master1.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\UserServiceReference\configuration91.svcinfo" />
@@ -95,24 +95,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj">
-      <Project>{1c8997d0-476d-4f08-b222-47f45fc86172}</Project>
-      <Name>BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{4faaf815-09ad-41f7-af72-9df1616e36d9}</Project>
-      <Name>DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Entities\Entities.csproj">
-      <Project>{ba1da19c-463e-4046-8247-0a0660dc1e62}</Project>
-      <Name>Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Storage\Storage.csproj">
-      <Project>{726d5631-200d-4c94-a3d8-5eb511470e52}</Project>
-      <Name>Storage</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

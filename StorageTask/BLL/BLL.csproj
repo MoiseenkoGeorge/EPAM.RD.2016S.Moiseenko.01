@@ -55,7 +55,6 @@
     <Compile Include="Loggers\Logger.cs" />
     <Compile Include="LoggibleUserService.cs" />
     <Compile Include="MasterUserService.cs" />
-    <Compile Include="Interfacies\IService.cs" />
     <Compile Include="Interfacies\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Network\Interfacies\ITransmitter.cs" />

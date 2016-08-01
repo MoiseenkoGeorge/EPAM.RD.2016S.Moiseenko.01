@@ -61,8 +61,6 @@ namespace BLL.Configurations.UserServiceConfigurations
 
         public Tuple<LoggibleUserService,LoggibleUserService[]> GetUserServices()
         {
-            if (countOfMasters > 1)
-                throw new InvalidOperationException();
             LoggibleUserService master = null;
             UserServiceElement[] userServiceElements = section.UserServiceItems.Cast<UserServiceElement>().ToArray();
             var slaveElements = userServiceElements.Where(s => !s.IsMaster);

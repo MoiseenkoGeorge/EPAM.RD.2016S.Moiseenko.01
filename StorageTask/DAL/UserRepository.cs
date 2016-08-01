@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using DAL.Interfacies;
 using Entities;
+using Storage.Criterias.Interfacies;
 using Storage.Storages.Interfacies;
 
 namespace DAL
@@ -19,6 +20,8 @@ namespace DAL
 
         public UserRepository(IUserStorage userStorage)
         {
+            if(userStorage == null)
+                throw new NullReferenceException(nameof(userStorage));
             this.userStorage = userStorage;
             this.localUserStorage = GetAllEntities().ToList();
             rwls = new ReaderWriterLockSlim();
@@ -106,9 +109,9 @@ namespace DAL
             throw new NotImplementedException();
         }
 
-        public List<int> GetUsersIdsByPredicate(Func<User, bool>[] funcs)
+        public List<int> GetUsersIdsByPredicate(IUserCriteria[] funcs)
         {
-            return localUserStorage.AsParallel().Where(u => funcs.All(f => f(u))).Select(u => u.Id).ToList();
+            return localUserStorage.AsParallel().Where(u => funcs.All(f => f.MeetCriteria(u))).Select(u => u.Id).ToList();
         }
     }
 }

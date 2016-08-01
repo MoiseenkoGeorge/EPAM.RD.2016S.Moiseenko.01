@@ -27,8 +27,8 @@ namespace SelfHost
             var master = userServices.Item1;
             var slaves = userServices.Item2;
             var userServiceList = new List<LoggibleUserService>();
-            userServiceList.AddRange(slaves);
-            userServiceList.Add(master);
+            if(slaves!= null) userServiceList.AddRange(slaves);
+            if(master != null) userServiceList.Add(master);
             // Create the ServiceHost.
             foreach (var service in userServiceList)
             {

@@ -8,6 +8,7 @@ using System.ServiceModel;
 using BLL.Interfacies;
 using BLL.Loggers.Interfacies;
 using Entities;
+using Storage.Criterias.Interfacies;
 
 namespace BLL
 {
@@ -20,6 +21,8 @@ namespace BLL
 
         public LoggibleUserService(ILogger logger, UserService userService) : base(userService.Name)
         {
+            if(logger == null || userService == null)
+                throw new NullReferenceException();
             this.logger = logger;
             this.userService = userService;
         }
@@ -68,7 +71,7 @@ namespace BLL
             }
         }
 
-        public override List<int> FindUsers(Func<User, bool>[] funcs)
+        public override List<int> FindUsers(IUserCriteria[] funcs)
         {
             
             logger.SendMessage(TraceEventType.Information, $"Find user by predicates");

@@ -16,6 +16,8 @@ using BLL.Configurations;
 using BLL.Configurations.UserServiceConfigurations;
 using BLL.Loggers;
 using BLL.Loggers.Interfacies;
+using Storage.Criterias;
+using Storage.Criterias.Interfacies;
 using Storage.Storages.Interfacies;
 
 namespace BLL.Tests
@@ -81,7 +83,7 @@ namespace BLL.Tests
             var configurator = new UserServiceConfigurator(userStorage, logger);
             var result = configurator.GetUserServices();
             result.Item1.AddUser(validUser);
-            Assert.AreEqual(0, result.Item2[0].FindUsers(new Func<User, bool>[] { u => u.FirstName == validUser.FirstName }).ToArray()[0]);
+            Assert.AreEqual(0, result.Item2[0].FindUsers(new IUserCriteria[] { new GenderCriteria() }).ToArray()[0]);
         }
 
         [Test]
@@ -91,7 +93,7 @@ namespace BLL.Tests
             var result = configurator.GetUserServices();
             result.Item1.AddUser(validUser);
             result.Item1.DeleteUser(validUser);
-            Assert.AreEqual(0, result.Item2[1].FindUsers(new Func<User, bool>[] { u => u.FirstName == validUser.FirstName }).Count);
+            Assert.AreEqual(0, result.Item2[1].FindUsers(new IUserCriteria[] { new GenderCriteria() }).Count);
         }
     }
 }
